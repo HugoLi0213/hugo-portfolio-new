@@ -2,6 +2,7 @@
   <div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+
       <div class="container px-4 d-flex align-items-center">
         <a class="navbar-brand fw-bold" href="#">Hugo Portfolio</a>
         <div class="d-flex align-items-center ms-4 me-auto d-none d-lg-flex">
@@ -142,7 +143,7 @@
         <div class="row justify-content-center">
           <div class="col-md-8 text-center">
             <p class="text-secondary mb-0">
-              Built with Vue.js | Styled with Bootstrap | Hosted on Vercel
+              Built with Vue.js | Styled with Bootstrap | Hosted on Vercel | Weather API: <a href="https://open-meteo.com/" target="_blank" rel="noopener" class="text-secondary">Open-Meteo</a>
             </p>
           </div>
         </div>

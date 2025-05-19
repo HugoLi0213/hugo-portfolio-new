@@ -1,95 +1,161 @@
 <template>
   <div>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-logo">Hugo Portfolio</div>
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+      <div class="container px-4">
+        <a class="navbar-brand fw-bold" href="#">Hugo Portfolio</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link px-3" href="#hero">Home</a></li>
+            <li class="nav-item"><a class="nav-link px-3" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link px-3" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link px-3" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <h1>Li Yin Chung, Hugo</h1>
-        <h2>Web Developer & AI Enthusiast</h2>
-        <p>
-          I build beautiful, performant web experiences.<br>
-          Let's create something amazing together.
-        </p>
-        <div class="hero-links">
-          <a :href="linkedin" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a :href="github" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-          <a :href="'mailto:' + email" title="Email"><i class="fas fa-envelope"></i></a>
+    <section class="hero py-5 mt-5" id="hero">
+      <div class="container px-4">
+        <div class="row align-items-center min-vh-75">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="display-4 fw-bold mb-3">Li Yin Chung, Hugo</h1>
+            <h2 class="h3 mb-4 text-secondary">Web Developer & AI Enthusiast</h2>
+            <p class="lead mb-4">
+              I build beautiful, performant web experiences.<br>
+              Let's create something amazing together.
+            </p>
+            <div class="d-flex gap-4">
+              <a :href="linkedin" target="_blank" class="text-dark fs-4 hover-effect"><i class="fab fa-linkedin"></i></a>
+              <a :href="github" target="_blank" class="text-dark fs-4 hover-effect"><i class="fab fa-github"></i></a>
+              <a :href="'mailto:' + email" class="text-dark fs-4 hover-effect"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6 text-center">
+            <img src="https://ui-avatars.com/api/?name=Hugo&background=000000&color=fff&size=256" 
+                 alt="Hugo Avatar" 
+                 class="img-fluid rounded-circle shadow-lg" 
+                 style="max-width: 250px;" />
+          </div>
         </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://ui-avatars.com/api/?name=Hugo&background=000000&color=fff&size=256" alt="Hugo Avatar" />
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="section projects-section" id="projects">
-      <h2>Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card" v-for="project in projects" :key="project.title">
-          <div class="project-image">
-            <i :class="project.icon"></i>
-          </div>
-          <div class="project-info">
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.description }}</p>
-            <div class="project-tags">
-              <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+    <section class="py-5 bg-light" id="projects">
+      <div class="container px-4">
+        <h2 class="text-center mb-5 display-5 fw-bold">Featured Projects</h2>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4" v-for="project in projects" :key="project.title">
+            <div class="card h-100 shadow-sm hover-card">
+              <div class="card-body p-4">
+                <div class="text-center mb-3">
+                  <i :class="project.icon + ' fa-2x text-primary'"></i>
+                </div>
+                <h3 class="h5 card-title fw-bold">{{ project.title }}</h3>
+                <p class="card-text text-secondary">{{ project.description }}</p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span v-for="tag in project.tags" :key="tag" 
+                        class="badge bg-light text-dark">
+                    {{ tag }}
+                  </span>
+                </div>
+                <a :href="project.link" target="_blank" class="btn btn-outline-dark w-100">View on GitHub</a>
+              </div>
             </div>
-            <a :href="project.link" target="_blank" class="project-link">View on GitHub</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="section skills-section" id="skills">
-      <h2>Skills</h2>
-      <div class="skills-list">
-        <div class="skill" v-for="skill in skills" :key="skill.name">
-          <i :class="skill.icon"></i>
-          <span>{{ skill.name }}</span>
+    <section class="py-5" id="skills">
+      <div class="container px-4">
+        <h2 class="text-center mb-5 display-5 fw-bold">Skills</h2>
+        <div class="row g-4">
+          <div class="col-6 col-md-4 col-lg-3" v-for="skill in skills" :key="skill.name">
+            <div class="card h-100 text-center shadow-sm hover-card">
+              <div class="card-body p-4">
+                <i :class="skill.icon + ' fa-2x mb-3 text-primary'"></i>
+                <p class="card-text mb-0 fw-medium">{{ skill.name }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- About Section -->
-    <section class="section about-section" id="about">
-      <h2>About Me</h2>
-      <div class="about-content">
-        <p>
-          Hi! I'm Hugo, a passionate web developer based in Hong Kong.<br>
-          I love building modern, user-focused web apps and exploring the latest in AI and frontend tech.<br>
-          <br>
-          <strong>Education:</strong><br>
-          Bachelor of Computer Science, HK Metropolitan University (2025)<br>
-          Higher Diploma in Data Science, HKU SPACE (2023)
-          <br><br>
-          <strong>About this web:</strong><br>
-          This portfolio is built with Vue.js and showcases my web development and AI projects. It features a modern, responsive design.
-        </p>
+    <section class="py-5 bg-light" id="about">
+      <div class="container px-4">
+        <h2 class="text-center mb-5 display-5 fw-bold">About Me</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <p class="lead mb-4">
+                  Hi! I'm Hugo, a passionate web developer based in Hong Kong.<br>
+                  I love building modern, user-focused web apps and exploring the latest in AI and frontend tech.
+                </p>
+                <p class="mb-4">
+                  <strong>Education:</strong><br>
+                  Bachelor of Computer Science, HK Metropolitan University (2025)<br>
+                  Higher Diploma in Data Science, HKU SPACE (2023)
+                </p>
+                <p class="mb-0">
+                  <strong>About this web:</strong><br>
+                  This portfolio is built with Vue.js and Bootstrap, showcasing my web development and AI projects.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact-section" id="contact">
-      <h2>Contact</h2>
-      <div class="contact-info">
-        <a :href="'mailto:' + email"><i class="fas fa-envelope"></i> {{ email }}</a>
-        <a href="tel:+85262095238"><i class="fas fa-phone"></i> +852 62095238</a>
-        <span><i class="fas fa-map-marker-alt"></i> Hong Kong</span>
+    <section class="py-5" id="contact">
+      <div class="container px-4">
+        <h2 class="text-center mb-5 display-5 fw-bold">Contact</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex flex-column align-items-center gap-4">
+                  <a :href="'mailto:' + email" class="text-dark text-decoration-none hover-effect">
+                    <i class="fas fa-envelope me-2"></i> {{ email }}
+                  </a>
+                  <a href="tel:+85262095238" class="text-dark text-decoration-none hover-effect">
+                    <i class="fas fa-phone me-2"></i> +852 62095238
+                  </a>
+                  <span class="text-dark">
+                    <i class="fas fa-map-marker-alt me-2"></i> Hong Kong
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-light">
+      <div class="container px-4">
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <p class="text-secondary mb-0">
+              Built with Vue.js | Styled with Bootstrap | Hosted on Vercel
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -154,274 +220,65 @@ const skills = [
 </script>
 
 <style scoped>
-body {
-  font-family: 'SF Pro Display', 'Segoe UI', 'Arial', sans-serif;
-  background: #ffffff;
-  margin: 0;
-  padding: 0;
-}
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  color: #000;
-  padding: 1.2rem 3vw;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-logo {
-  font-weight: 700;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-  color: #000;
-}
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 2.2rem;
-  margin: 0;
-  padding: 0;
-}
-.navbar a {
-  color: #000;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.08rem;
-  transition: color 0.2s;
-}
-.navbar a:hover {
-  color: #444;
-}
 .hero {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
   background: linear-gradient(120deg, #ffffff 60%, #f5f5f5 100%);
-  padding: 3rem 2vw 2rem 2vw;
-  border-bottom: 1px solid #e0e0e0;
 }
-.hero-content {
-  flex: 1 1 350px;
-  min-width: 320px;
-  max-width: 500px;
-  text-align: left;
-  margin-right: 2.5rem;
+
+.navbar {
+  padding: 1rem 0;
 }
-.hero-content h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  letter-spacing: 1px;
-  color: #000;
-}
-.hero-content h2 {
-  color: #000;
-  font-size: 1.5rem;
-  margin-bottom: 1.2rem;
+
+.nav-link {
   font-weight: 500;
+  transition: color 0.3s;
 }
-.hero-content p {
-  font-size: 1.15rem;
-  color: #444;
-  margin-bottom: 1.5rem;
+
+.nav-link:hover {
+  color: #000000 !important;
 }
-.hero-links a {
-  margin-right: 1.1rem;
-  font-size: 1.7rem;
-  color: #000;
-  transition: color 0.2s;
+
+.hover-card {
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.hero-links a:hover {
-  color: #444;
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
-.hero-image {
-  flex: 0 1 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.hover-effect {
+  transition: transform 0.3s, color 0.3s;
 }
-.hero-image img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  border: 6px solid #000;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+
+.hover-effect:hover {
+  transform: translateY(-2px);
+  color: #000000 !important;
 }
-.section {
-  max-width: 1100px;
-  margin: 3.5rem auto;
-  padding: 2.2rem 2vw 1.5rem 2vw;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+
+.min-vh-75 {
+  min-height: 75vh;
 }
-.section h2 {
-  color: #000;
-  margin-bottom: 1.7rem;
-  font-size: 2.2rem;
-  letter-spacing: 1px;
-  font-weight: 700;
-  text-align: center;
-}
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.2rem;
-  margin-top: 1.5rem;
-}
-.project-card {
-  background: #f5f5f5;
-  border-radius: 14px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-  padding: 2rem 1.3rem 1.3rem 1.3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition: box-shadow 0.2s, transform 0.2s;
-  min-height: 260px;
-  position: relative;
-  overflow: hidden;
-  animation: fadeInUp 0.7s;
-  border: 1px solid #e0e0e0;
-  margin-bottom: 0.5rem;
-}
-.project-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
-  border-color: #bdbdbd;
-}
-.project-image {
-  font-size: 2.5rem;
-  color: #000;
-  margin-bottom: 0.7rem;
-}
-.project-card h3 {
-  margin: 0 0 0.5rem 0;
-  color: #000;
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-.project-card p {
-  color: #444;
-  font-size: 1.08rem;
-  margin-bottom: 0.7rem;
-  margin-top: 0.2rem;
-}
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  margin-top: 0.5rem;
-  background: #e9ecef;
-  padding: 0.6rem 0.7rem;
-  border-radius: 7px;
-  width: 100%;
-}
-.project-tags span {
-  background: #d1e7dd;
-  color: #155724;
-  border-radius: 5px;
-  padding: 0.25rem 0.85rem;
-  font-size: 1.01rem;
-  margin-bottom: 0.3rem;
-}
-.project-link {
-  color: #fff;
-  background: #000;
-  padding: 0.4rem 1.1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s;
-  margin-top: auto;
-  align-self: flex-end;
-}
-.project-link:hover {
-  background: #444;
-}
-.skills-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-.skill {
-  background: #f5f5f5;
-  border-radius: 8px;
-  padding: 1.1rem 1.5rem;
-  text-align: center;
-  font-size: 1.1rem;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 110px;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.skill i {
-  font-size: 2rem;
-  margin-bottom: 0.4rem;
-  color: #000;
-}
-.skill:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-}
-.about-content {
-  max-width: 700px;
-  margin: 0 auto;
-  font-size: 1.15rem;
-  color: #444;
-  text-align: center;
-}
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  font-size: 1.15rem;
-  align-items: center;
-  margin-top: 1.5rem;
-}
-.contact-info a, .contact-info span {
-  color: #000;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.1rem;
-}
-.contact-info a:hover {
-  color: #444;
-}
-@media (max-width: 900px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 2.5rem 2vw 1.5rem 2vw;
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .display-5 {
+    font-size: 2.5rem;
   }
-  .hero-content {
-    margin-right: 0;
-    text-align: center;
+  
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  .hero-image {
-    margin-top: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .display-5 {
+    font-size: 2rem;
   }
-  .section {
-    padding: 1.2rem 1vw 1rem 1vw;
-  }
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  .skills-list {
-    gap: 1rem;
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 </style>

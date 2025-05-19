@@ -1,6 +1,6 @@
 <template>
   <div class="clock-code-compact">
-    <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/cat.svg" alt="Cat Logo" class="cat-logo-icon" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Flag_of_Hong_Kong.svg" alt="HK Flag" class="hk-flag-icon" />
     <span class="clock-time">{{ time }}</span>
     <span class="clock-hkt">HKT</span>
   </div>
@@ -48,7 +48,7 @@ onBeforeUnmount(() => {
   min-width: 0;
   height: 2.1em;
 }
-.cat-logo-icon {
+.hk-flag-icon {
   width: 1.5em;
   height: 1.5em;
   margin-right: 0.4em;
@@ -57,6 +57,7 @@ onBeforeUnmount(() => {
   border-radius: 2px;
   object-fit: cover;
   background: #fff;
+  box-shadow: 0 0 2px #ccc;
 }
 .clock-time {
   font-variant-numeric: tabular-nums;

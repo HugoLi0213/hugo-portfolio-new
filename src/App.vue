@@ -2,8 +2,12 @@
   <div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-      <div class="container px-4">
+      <div class="container px-4 d-flex align-items-center">
         <a class="navbar-brand fw-bold" href="#">Hugo Portfolio</a>
+        <div class="d-flex align-items-center ms-4 me-auto d-none d-lg-flex">
+          <Clock />
+          <WeatherHK />
+        </div>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +27,7 @@
     <section class="hero py-5 mt-5" id="hero">
       <div class="container px-4">
         <div class="row align-items-center min-vh-75">
-          <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="col-lg-6 mb-5 mb-lg-0" ref="heroContent">
             <h1 class="display-4 fw-bold mb-3">Li Yin Chung, Hugo</h1>
             <h2 class="h3 mb-4 text-secondary">Web Developer & AI Enthusiast</h2>
             <p class="lead mb-4">
@@ -36,7 +40,7 @@
               <a :href="'mailto:' + email" class="text-dark fs-4 hover-effect"><i class="fas fa-envelope"></i></a>
             </div>
           </div>
-          <div class="col-lg-6 text-center">
+          <div class="col-lg-6 text-center" ref="heroImage">
             <img src="https://ui-avatars.com/api/?name=Hugo&background=000000&color=fff&size=256" 
                  alt="Hugo Avatar" 
                  class="img-fluid rounded-circle shadow-lg" 
@@ -47,76 +51,64 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="py-5 bg-light" id="projects">
-      <div class="container px-4">
-        <h2 class="text-center mb-5 display-5 fw-bold">Featured Projects</h2>
-        <div class="row g-4">
-          <div class="col-md-6 col-lg-4" v-for="project in projects" :key="project.title">
-            <div class="card h-100 shadow-sm hover-card">
-              <div class="card-body p-4">
-                <div class="text-center mb-3">
-                  <i :class="project.icon + ' fa-2x text-primary'"></i>
-                </div>
-                <h3 class="h5 card-title fw-bold">{{ project.title }}</h3>
-                <p class="card-text text-secondary">{{ project.description }}</p>
-                <div class="d-flex flex-wrap gap-2 mb-3">
-                  <span v-for="tag in project.tags" :key="tag" 
-                        class="badge bg-light text-dark">
-                    {{ tag }}
-                  </span>
-                </div>
-                <a :href="project.link" target="_blank" class="btn btn-outline-dark w-100">View on GitHub</a>
+    <AnimatedSection title="Featured Projects" subtitle="A showcase of my best work and collaborations." id="projects" bgClass="bg-light">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4" v-for="project in projects" :key="project.title">
+          <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body p-4">
+              <div class="text-center mb-3">
+                <i :class="project.icon + ' fa-2x text-primary'"></i>
               </div>
+              <h3 class="h5 card-title fw-bold">{{ project.title }}</h3>
+              <p class="card-text text-secondary">{{ project.description }}</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span v-for="tag in project.tags" :key="tag" class="badge bg-light text-dark">{{ tag }}</span>
+              </div>
+              <a :href="project.link" target="_blank" class="btn btn-outline-dark w-100">View on GitHub</a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
 
     <!-- Skills Section -->
-    <section class="py-5" id="skills">
-      <div class="container px-4">
-        <h2 class="text-center mb-5 display-5 fw-bold">Skills</h2>
-        <div class="row g-4">
-          <div class="col-6 col-md-4 col-lg-3" v-for="skill in skills" :key="skill.name">
-            <div class="card h-100 text-center shadow-sm hover-card">
-              <div class="card-body p-3">
-                <i :class="skill.icon + ' fa-2x mb-2 text-primary'"></i>
-                <p class="card-text mb-0 fw-medium skill-name">{{ skill.name }}</p>
-              </div>
+    <AnimatedSection title="Skills" subtitle="Technologies, tools, and platforms I use." id="skills">
+      <div class="row g-4">
+        <div class="col-6 col-md-4 col-lg-3" v-for="skill in skills" :key="skill.name">
+          <div class="card h-100 text-center shadow-sm hover-card">
+            <div class="card-body p-3">
+              <i :class="skill.icon + ' fa-2x mb-2 text-primary'"></i>
+              <p class="card-text mb-0 fw-medium skill-name">{{ skill.name }}</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
 
     <!-- About Section -->
-    <section class="py-5 bg-light" id="about">
-      <div class="container px-4">
-        <h2 class="text-center mb-5 display-5 fw-bold">About Me</h2>
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="card shadow-sm">
-              <div class="card-body p-4">
-                <p class="lead mb-4">
-                  Hi! I'm Hugo, a passionate web developer based in Hong Kong.<br>
-                  I love building modern, user-focused web apps and exploring the latest in AI and frontend tech.
-                </p>
-                <p class="mb-4">
-                  <strong>Education:</strong><br>
-                  Bachelor of Computer Science, HK Metropolitan University (2025)<br>
-                  Higher Diploma in Data Science, HKU SPACE (2023)
-                </p>
-                <p class="mb-0">
-                  <strong>About this web:</strong><br>
-                  This portfolio is built with Vue.js and Bootstrap, showcasing my web development and AI projects.
-                </p>
-              </div>
+    <AnimatedSection title="About Me" subtitle="Get to know me and my background." id="about" bgClass="bg-light">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <p class="lead mb-4">
+                Hi! I'm Hugo, a passionate web developer based in Hong Kong.<br>
+                I love building modern, user-focused web apps and exploring the latest in AI and frontend tech.
+              </p>
+              <p class="mb-4">
+                <strong>Education:</strong><br>
+                Bachelor of Computer Science, HK Metropolitan University (2025)<br>
+                Higher Diploma in Data Science, HKU SPACE (2023)
+              </p>
+              <p class="mb-0">
+                <strong>About this web:</strong><br>
+                This portfolio is built with Vue.js and Bootstrap, showcasing my web development and AI projects.
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
 
     <!-- Contact Section -->
     <section class="py-5" id="contact">
@@ -160,10 +152,17 @@
 </template>
 
 <script setup>
-const email = "s12332146@gmail.com";
-const linkedin = "https://www.linkedin.com/";
-const github = "https://github.com/HugoLi0213";
+import { onMounted, ref } from 'vue'
+import AnimatedSection from './components/AnimatedSection.vue'
+import Clock from './components/Clock.vue'
+import WeatherHK from './components/WeatherHK.vue'
 
+// Social media links
+const linkedin = 'https://www.linkedin.com/in/your-profile'
+const github = 'https://github.com/HugoLi0213'
+const email = 's12332146@gmail.com'
+
+// Project data
 const projects = [
   {
     title: "WeatherApp",
@@ -202,6 +201,7 @@ const projects = [
   }
 ];
 
+// Skills data
 const skills = [
   { name: "JavaScript", icon: "fab fa-js-square" },
   { name: "Python", icon: "fab fa-python" },
@@ -216,7 +216,35 @@ const skills = [
   { name: "Figma", icon: "fab fa-figma" },
   { name: "Canva", icon: "fas fa-paint-brush" },
   { name: "Cursor", icon: "fas fa-mouse-pointer" },
-];
+]
+
+// Animation references
+const heroContent = ref(null)
+const heroImage = ref(null)
+
+// Initialize animations
+onMounted(() => {
+  const gsap = window.gsap
+  if (gsap && heroContent.value && heroImage.value) {
+    // Animate only element nodes and set a fallback title if needed
+    Array.from(heroContent.value.children).forEach((el, i) => {
+      if (el.nodeType === 1 && el.tagName) {
+        gsap.from(el, {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          delay: 0.5 + i * 0.2
+        })
+      }
+    })
+    gsap.from(heroImage.value, {
+      opacity: 0,
+      scale: 0.8,
+      duration: 1,
+      delay: 0.8
+    })
+  }
+})
 </script>
 
 <style scoped>
@@ -238,21 +266,19 @@ const skills = [
 }
 
 .hover-card {
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease-in-out;
 }
 
 .hover-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 .hover-effect {
-  transition: transform 0.3s, color 0.3s;
+  transition: transform 0.2s ease-in-out;
 }
 
 .hover-effect:hover {
-  transform: translateY(-2px);
-  color: #000000 !important;
+  transform: scale(1.1);
 }
 
 .min-vh-75 {
@@ -283,6 +309,14 @@ const skills = [
 }
 
 .skill-name {
+  transition: color 0.2s ease-in-out;
+}
+
+.card:hover .skill-name {
+  color: var(--bs-primary);
+}
+
+.skill-name {
   font-size: 0.9rem;
   line-height: 1.2;
   min-height: 2.4rem;
@@ -304,5 +338,30 @@ const skills = [
   .fa-2x {
     font-size: 1.5em;
   }
+}
+
+/* Additional styles for improved layout */
+.navbar .clock-widget {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+/* Add smooth scrolling to the page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve spacing for sections */
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* Add transition to navbar shadow */
+.navbar {
+  transition: box-shadow 0.3s ease-in-out;
 }
 </style>

@@ -159,7 +159,7 @@ import Clock from './components/Clock.vue'
 import WeatherHK from './components/WeatherHK.vue'
 
 // Social media links
-const linkedin = 'https://www.linkedin.com/in/your-profile'
+const linkedin = 'https://www.linkedin.com/in/hugo-li-77a0581b0/'
 const github = 'https://github.com/HugoLi0213'
 const email = 's12332146@gmail.com'
 

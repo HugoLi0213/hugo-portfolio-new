@@ -80,9 +80,9 @@
         <div class="row g-4">
           <div class="col-6 col-md-4 col-lg-3" v-for="skill in skills" :key="skill.name">
             <div class="card h-100 text-center shadow-sm hover-card">
-              <div class="card-body p-4">
-                <i :class="skill.icon + ' fa-2x mb-3 text-primary'"></i>
-                <p class="card-text mb-0 fw-medium">{{ skill.name }}</p>
+              <div class="card-body p-3">
+                <i :class="skill.icon + ' fa-2x mb-2 text-primary'"></i>
+                <p class="card-text mb-0 fw-medium skill-name">{{ skill.name }}</p>
               </div>
             </div>
           </div>
@@ -279,6 +279,30 @@ const skills = [
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+.skill-name {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  min-height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 0.75rem !important;
+  }
+  
+  .skill-name {
+    font-size: 0.8rem;
+    min-height: 2rem;
+  }
+  
+  .fa-2x {
+    font-size: 1.5em;
   }
 }
 </style>

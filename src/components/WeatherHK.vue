@@ -39,7 +39,10 @@ function weatherCodeToIcon(code) {
   return 'https://cdn.jsdelivr.net/gh/erikflowers/weather-icons/svg/wi-cloudy.svg'
 }
 
-onMounted(fetchWeather)
+onMounted(() => {
+  fetchWeather() // Fetch immediately on mount
+  setInterval(fetchWeather, 600000) // Refresh every 10 minutes
+})
 </script>
 
 <style scoped>

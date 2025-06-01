@@ -38,16 +38,24 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-  background: #fff;
-  color: #111;
-  border-radius: 6px;
+  background: rgba(236, 154, 154, 0.1);
+  color: #4b5563;
+  border-radius: 8px;
   padding: 0.1em 0.7em 0.1em 0.5em;
   font-size: 1em;
   gap: 0.3em;
-  border: 1px solid #e0e0e0;
+  border: 1px solid rgba(236, 154, 154, 0.2);
   min-width: 0;
   height: 2.1em;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
+
+.clock-code-compact:hover {
+  background: rgba(236, 154, 154, 0.2);
+  border-color: rgba(236, 154, 154, 0.5);
+}
+
 .hk-flag-icon {
   width: 1.5em;
   height: 1.5em;
@@ -57,20 +65,22 @@ onBeforeUnmount(() => {
   border-radius: 2px;
   object-fit: cover;
   background: #fff;
-  box-shadow: 0 0 2px #ccc;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+
 .clock-time {
   font-variant-numeric: tabular-nums;
   font-size: 1em;
   letter-spacing: 0.03em;
-  color: #111;
+  color: #1f2937;
+  font-weight: 500;
 }
+
 .clock-hkt {
-  color: #111;
+  color: #6b7280;
   font-size: 0.8em;
   margin-left: 0.25em;
   font-weight: 600;
   letter-spacing: 0.04em;
-  opacity: 0.7;
 }
 </style>

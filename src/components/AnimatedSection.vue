@@ -1,8 +1,8 @@
 <template>
-  <section :class="['py-5', bgClass]" :id="id" ref="section">
+  <section :class="[id === 'about' ? 'py-3' : 'py-5', bgClass]" :id="id" ref="section">
     <div class="container px-4">
-      <h2 class="text-center mb-2 display-5 fw-bold" ref="titleEl" v-text="title"></h2>
-      <div v-if="subtitle" class="text-center mb-5 text-secondary fs-5" v-text="subtitle"></div>
+      <h2 class="text-center mb-2 display-5 fw-bold" ref="titleEl" v-text="title" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></h2>
+      <div v-if="subtitle" class="text-center mb-4 fs-5" v-text="subtitle" style="color: #4b5563;"></div>
       <div ref="content" class="content-wrapper">
         <slot></slot>
       </div>

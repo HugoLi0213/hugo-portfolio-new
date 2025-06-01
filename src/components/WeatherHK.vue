@@ -50,26 +50,36 @@ onMounted(() => {
   display: flex;
   align-items: center;
   font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-  background: #fff;
-  color: #111;
-  border-radius: 6px;
+  background: rgba(236, 154, 154, 0.1);
+  color: #4b5563;
+  border-radius: 8px;
   padding: 0.1em 0.6em;
   font-size: 1em;
   gap: 0.4em;
-  border: 1px solid #e0e0e0;
+  border: 1px solid rgba(236, 154, 154, 0.2);
   min-width: 0;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 }
+
+.weather-hk-compact:hover {
+  background: rgba(236, 154, 154, 0.2);
+  border-color: rgba(236, 154, 154, 0.5);
+}
+
 .weather-icon {
   height: 1.2em;
   width: 1.2em;
   margin-right: 0.2em;
   vertical-align: middle;
-  filter: none;
+  filter: brightness(1.2) contrast(1.1);
 }
+
 .weather-temp {
   font-variant-numeric: tabular-nums;
   font-size: 1em;
   letter-spacing: 0.03em;
-  color: #111;
+  color: #1f2937;
+  font-weight: 500;
 }
 </style>

@@ -15,13 +15,13 @@
   --text-primary: #1f2937;
   --text-secondary: #374151;
   --text-muted: #4b5563;
-  --accent-primary: #d946ef;
-  --accent-secondary: #f472b6;
-  --accent-tertiary: #ffb7c5;
-  --border-primary: rgba(217, 70, 239, 0.1);
-  --border-secondary: rgba(217, 70, 239, 0.2);
-  --shadow-primary: rgba(217, 70, 239, 0.1);
-  --shadow-secondary: rgba(217, 70, 239, 0.2);
+  --accent-primary: #ffffff; /* Changed from #d946ef to white */
+  --accent-secondary: #ffffff; /* Changed from #f472b6 to white */
+  --accent-tertiary: #ffb7c5; /* Kept as is */
+  --border-primary: rgba(255, 255, 255, 0.1); /* Changed from rgba(217, 70, 239, 0.1) to white with alpha */
+  --border-secondary: rgba(255, 255, 255, 0.2); /* Changed from rgba(217, 70, 239, 0.2) to white with alpha */
+  --shadow-primary: rgba(255, 255, 255, 0.1); /* Changed from rgba(217, 70, 239, 0.1) to white with alpha */
+  --shadow-secondary: rgba(255, 255, 255, 0.2); /* Changed from rgba(217, 70, 239, 0.2) to white with alpha */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,7 +32,7 @@
 /* Global light theme overrides */
 body {
   margin: 0;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%) !important;
+  background-color: var(--bg-primary) !important; /* Reverted to theme's primary background */
   color: var(--text-primary) !important;
   min-width: 320px;
   min-height: 100vh;

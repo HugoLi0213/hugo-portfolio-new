@@ -47,7 +47,7 @@
                     <h5 class="mb-3" style="color: #ec9a9a;"><i class="fas fa-graduation-cap me-2"></i>Education</h5>
                     <p class="mb-1" style="color: #374151;">
                       <strong>Bachelor of Computer Science</strong><br>
-                      <small style="color: #6b7280;">HK Metropolitan University (2025)</small>
+                      <small style="color: #6b7280; font-weight: bold; font-size: 1.1em; letter-spacing: 0.02em;">HK Metropolitan University (2025)</small>
                     </p>
                     <p class="mb-3" style="color: #4b5563;">
                       <a href="https://gorgeous-cardigan-bf1.notion.site/Completed-course-2056edaa848380cabfebee176b41af3b" target="_blank" class="text-decoration-none hover-effect" style="color: #ec9a9a; font-size: 0.9rem;">
@@ -56,7 +56,7 @@
                     </p>
                     <p class="mb-0" style="color: #374151;">
                       <strong>Higher Diploma in Data Science</strong><br>
-                      <small style="color: #6b7280;">HKU SPACE (2023)</small>
+                      <small style="color: #6b7280; font-weight: bold; font-size: 1.1em; letter-spacing: 0.02em;">HKU SPACE (2023)</small>
                     </p>
                   </div>
                 </div>
@@ -67,14 +67,14 @@
                     <h5 class="mb-3" style="color: #ec9a9a;"><i class="fas fa-concierge-bell me-2"></i>Specialties</h5>
                     <div class="row">
                       <div class="col-6">
-                        <p class="small mb-2" style="color: #4b5563;">Web Development</p>
-                        <p class="small mb-2" style="color: #4b5563;">Frontend Development</p>
-                        <p class="small mb-2" style="color: #4b5563;">AI Integration</p>
+                        <p class="small mb-2 specialty-highlight">Web Development</p>
+                        <p class="small mb-2 specialty-highlight">Frontend Development</p>
+                        <p class="small mb-2 specialty-highlight">AI Integration</p>
                       </div>
                       <div class="col-6">
-                        <p class="small mb-2" style="color: #4b5563;">UI/UX Design</p>
-                        <p class="small mb-2" style="color: #4b5563;">Web Performance</p>
-                        <p class="small mb-2" style="color: #4b5563;">Modern Design</p>
+                        <p class="small mb-2 specialty-highlight">UI/UX Design</p>
+                        <p class="small mb-2 specialty-highlight">Web Performance</p>
+                        <p class="small mb-2 specialty-highlight">Modern Design</p>
                       </div>
                     </div>
                   </div>
@@ -97,7 +97,8 @@
               <div class="d-flex flex-wrap gap-2 mb-3">
                 <span v-for="tag in project.tags" :key="tag" class="badge" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); color: white;">{{ tag }}</span>
               </div>
-              <a :href="project.link" target="_blank" class="btn btn-outline-primary w-100">View on GitHub</a>
+              <a :href="project.link" target="_blank" class="btn btn-outline-primary w-100 mb-2">View on GitHub</a>
+              <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-outline-success w-100">Live Demo</a>
             </div>
           </div>
         </div>
@@ -137,13 +138,15 @@ const projects = [
     description: "A simple weather application that fetches and displays weather data for any city.",
     tags: ["JavaScript", "API", "Web App", "HTML", "CSS"],
     link: "https://github.com/HugoLi0213/weatherapp",
+    demo: null,
     icon: "fas fa-cloud-sun"
   },
   {
     title: "PPE Detection & Danger Zone Monitoring",
-    description: "Monitors safety by detecting PPE and danger zones using computer vision.",
-    tags: ["HTML", "AI", "Computer Vision", "Python", "OpenCV", "Flask"],
+    description: "Monitors safety by detecting PPE and danger zones using computer vision. Runs on Jetson Nano (edge device) with Linux.",
+    tags: ["HTML", "AI", "Computer Vision", "Python", "OpenCV", "Flask", "Jetson Nano", "Linux"],
     link: "https://github.com/HugoLi0213/PPE-Detection-and-Danger-Zone-Monitoring-System",
+    demo: null,
     icon: "fas fa-hard-hat"
   },
   {
@@ -151,6 +154,7 @@ const projects = [
     description: "An AI-powered tool to analyze and improve website SEO.",
     tags: ["TypeScript", "AI", "SEO", "Node.js", "Express", "React"],
     link: "https://github.com/HugoLi0213/SEO-Sleuth-with-AI",
+    demo: "https://seo-henna-two.vercel.app/",
     icon: "fas fa-search"
   },
   {
@@ -158,6 +162,7 @@ const projects = [
     description: "A web guide for Sun Yat-Sen tours, providing historical information and navigation.",
     tags: ["HTML", "Web Guide", "JavaScript", "Bootstrap", "CSS"],
     link: "https://github.com/HugoLi0213/Sun-Yat-Sen-tour-guid",
+    demo: "https://sun-yat-sen-tour-guid.netlify.app/",
     icon: "fas fa-map-marked-alt"
   },
   {
@@ -165,6 +170,7 @@ const projects = [
     description: "A Vue.js web app celebrating Hong Kong's significant moments - like cherry blossoms marking seasons, this app marks time with beauty and meaning.",
     tags: ["Vue.js", "Bootstrap", "Web App", "JavaScript", "HTML", "CSS"],
     link: "https://github.com/HugoLi0213/Hong-Kong-date-countdown-web",
+    demo: "https://hong-kong-date-countdown-web.vercel.app/",
     icon: "fas fa-calendar-alt"
   }
 ];
@@ -351,6 +357,22 @@ onMounted(() => {
   box-shadow: 0 8px 20px rgba(236, 154, 154, 0.3);
 }
 
+.btn-outline-success {
+  border: 2px solid #38a169;
+  color: #38a169;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: rgba(56, 161, 105, 0.1);
+}
+
+.btn-outline-success:hover {
+  background: linear-gradient(45deg, #38a169, #68d391);
+  color: white;
+  border-color: #38a169;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(56, 161, 105, 0.3);
+}
+
 .skill-name {
   transition: all 0.2s ease-in-out;
   font-size: 0.9rem;
@@ -363,6 +385,13 @@ onMounted(() => {
 
 .card:hover .skill-name {
   color: #ec9a9a; /* Pink color on hover */
+}
+
+.specialty-highlight {
+  color: #4b5563;
+  font-weight: bold;
+  font-size: 1.05em;
+  letter-spacing: 0.01em;
 }
 
 /* Responsive adjustments if specific to home content */

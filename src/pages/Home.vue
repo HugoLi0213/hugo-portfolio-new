@@ -136,7 +136,7 @@ const projects = [
   {
     title: "WeatherApp",
     description: "A simple weather application that fetches and displays weather data for any city.",
-    tags: ["JavaScript", "API", "Web App", "HTML", "CSS"],
+    tags: ["JavaScript", "API", "Web App", "HTML", "CSS", "React Native"],
     link: "https://github.com/HugoLi0213/weatherapp",
     demo: null,
     icon: "fas fa-cloud-sun"

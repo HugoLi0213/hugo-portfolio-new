@@ -208,6 +208,7 @@ const profileImage = ref(null)
 // Track image loading state to ensure smooth entrance
 const isImageLoaded = ref(false)
 const isAnimationReady = ref(false)
+const loadingStartTime = ref(Date.now())
 
 // CONTACT & SOCIAL MEDIA LINKS
 // ===========================
@@ -329,14 +330,42 @@ const getBlossomStyle = (index) => {
 // Handle image loading events to ensure smooth entrance
 const onImageLoaded = () => {
   console.log('Profile image loaded successfully')
-  isImageLoaded.value = true
-  checkAndStartAnimation()
+  
+  // Calculate how long loading has been displayed
+  const elapsedTime = Date.now() - loadingStartTime.value
+  const minLoadingTime = 700 // 0.7 seconds
+  
+  if (elapsedTime >= minLoadingTime) {
+    // Minimum time has passed, show content immediately
+    isImageLoaded.value = true
+    checkAndStartAnimation()
+  } else {
+    // Wait for remaining time before showing content
+    const remainingTime = minLoadingTime - elapsedTime
+    setTimeout(() => {
+      isImageLoaded.value = true
+      checkAndStartAnimation()
+    }, remainingTime)
+  }
 }
 
 const onImageError = () => {
   console.warn('Profile image failed to load, proceeding with animation')
-  isImageLoaded.value = true
-  checkAndStartAnimation()
+  
+  // Apply same minimum loading time even for errors
+  const elapsedTime = Date.now() - loadingStartTime.value
+  const minLoadingTime = 700 // 0.7 seconds
+  
+  if (elapsedTime >= minLoadingTime) {
+    isImageLoaded.value = true
+    checkAndStartAnimation()
+  } else {
+    const remainingTime = minLoadingTime - elapsedTime
+    setTimeout(() => {
+      isImageLoaded.value = true
+      checkAndStartAnimation()
+    }, remainingTime)
+  }
 }
 
 // PRELOAD CRITICAL IMAGES
@@ -359,8 +388,7 @@ const preloadCriticalImages = () => {
       
       // If this is the main profile image, mark as loaded
       if (index === 0) {
-        isImageLoaded.value = true
-        checkAndStartAnimation()
+        onImageLoaded() // Use the updated handler with minimum time logic
       }
     }
     img.onerror = () => {
@@ -369,8 +397,7 @@ const preloadCriticalImages = () => {
       
       // If this is the main profile image and it fails, still proceed
       if (index === 0) {
-        isImageLoaded.value = true
-        checkAndStartAnimation()
+        onImageError() // Use the updated handler with minimum time logic
       }
     }
     img.src = path
@@ -448,6 +475,9 @@ const startEntranceAnimations = () => {
 onMounted(() => {
   console.log('Home component mounted, starting image preload')
   
+  // Record loading start time
+  loadingStartTime.value = Date.now()
+  
   // Mark that component is ready for animation
   isAnimationReady.value = true
   
@@ -473,7 +503,7 @@ onMounted(() => {
       isImageLoaded.value = true
       checkAndStartAnimation()
     }
-  }, 3000) // 3 second timeout
+  }, 700) // 0.7 second timeout
 })
 
 </script>

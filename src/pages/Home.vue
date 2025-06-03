@@ -1,14 +1,16 @@
 <template>
   <div>
-    <!-- 
-      HOME PAGE TEMPLATE
-      ===================
-      This is the main homepage layout containing:
-      1. Hero section with personal introduction and cherry blossom animation
-      2. About section with education and specialties
-      3. Projects showcase section
-      4. Skills/technologies section
-    -->
+    <!-- Main Content - Hidden until loading complete -->
+    <div :class="{ 'content-hidden': !isImageLoaded }">
+      <!-- 
+        HOME PAGE TEMPLATE
+        ===================
+        This is the main homepage layout containing:
+        1. Hero section with personal introduction and cherry blossom animation
+        2. About section with education and specialties
+        3. Projects showcase section
+        4. Skills/technologies section
+      -->
       <!-- Hero Section with Integrated About -->
     <section class="hero py-3 mt-3" id="hero">
       <div class="container px-4" style="position: relative; z-index: 3;">
@@ -47,7 +49,18 @@
           
           <!-- Right Column: Profile Image -->
           <div class="col-lg-6 text-center" ref="heroImage">
-            <img src="../assets/IMG_3399.jpg" alt="LI YIN CHUNG, Hugo Profile Photo" class="img-fluid rounded-circle shadow-lg hero-avatar" style="object-fit: cover; object-position: center;" />
+            <img 
+              ref="profileImage"
+              src="../assets/IMG_3399.jpg" 
+              alt="LI YIN CHUNG, Hugo Profile Photo" 
+              class="img-fluid rounded-circle shadow-lg hero-avatar" 
+              style="object-fit: cover; object-position: center;" 
+              @load="onImageLoaded"
+              @error="onImageError"
+              loading="eager"
+              decoding="sync"
+              fetchpriority="high"
+            />
           </div>
         </div>
 
@@ -155,6 +168,15 @@
         </div>
       </div>
     </AnimatedSection>
+    </div>
+    
+    <!-- Loading Overlay - Shown while assets are loading -->
+    <div v-if="!isImageLoaded" class="loading-overlay">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Loading...</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -173,6 +195,19 @@
 // Vue Composition API imports
 import { onMounted, ref } from 'vue';
 import AnimatedSection from '../components/AnimatedSection.vue';
+
+// COMPONENT REFS
+// ==============
+// Vue refs for GSAP animation targets and image loading
+const heroContent = ref(null)
+const heroImage = ref(null)
+const profileImage = ref(null)
+
+// LOADING STATE
+// =============
+// Track image loading state to ensure smooth entrance
+const isImageLoaded = ref(false)
+const isAnimationReady = ref(false)
 
 // CONTACT & SOCIAL MEDIA LINKS
 // ===========================
@@ -271,9 +306,8 @@ const skills = [
 
 // ANIMATION REFERENCES
 // ===================
-// Vue refs for GSAP animation targets
-const heroContent = ref(null)
-const heroImage = ref(null)
+// Additional refs for loading state management
+// heroContent and heroImage refs are defined above with loading state
 
 // CHERRY BLOSSOM ANIMATION FUNCTION
 // ================================
@@ -290,34 +324,156 @@ const getBlossomStyle = (index) => {
   }
 }
 
-// GSAP ANIMATIONS INITIALIZATION
-// ==============================
-// Runs after component is mounted to animate hero elements
-onMounted(() => {
+// IMAGE LOADING HANDLERS
+// ======================
+// Handle image loading events to ensure smooth entrance
+const onImageLoaded = () => {
+  console.log('Profile image loaded successfully')
+  isImageLoaded.value = true
+  checkAndStartAnimation()
+}
+
+const onImageError = () => {
+  console.warn('Profile image failed to load, proceeding with animation')
+  isImageLoaded.value = true
+  checkAndStartAnimation()
+}
+
+// PRELOAD CRITICAL IMAGES
+// ========================
+// Preload important images to ensure smooth loading experience
+const preloadCriticalImages = () => {
+  const imagePaths = [
+    '../assets/IMG_3399.jpg',
+    '../assets/profile.jpg'  // Backup image if available
+  ]
+  
+  let loadedCount = 0
+  const totalImages = imagePaths.length
+  
+  imagePaths.forEach((path, index) => {
+    const img = new Image()
+    img.onload = () => {
+      loadedCount++
+      console.log(`Preloaded image ${index + 1}/${totalImages}`)
+      
+      // If this is the main profile image, mark as loaded
+      if (index === 0) {
+        isImageLoaded.value = true
+        checkAndStartAnimation()
+      }
+    }
+    img.onerror = () => {
+      loadedCount++
+      console.warn(`Failed to preload image ${index + 1}/${totalImages}`)
+      
+      // If this is the main profile image and it fails, still proceed
+      if (index === 0) {
+        isImageLoaded.value = true
+        checkAndStartAnimation()
+      }
+    }
+    img.src = path
+  })
+}
+
+// ANIMATION CONTROL
+// =================
+// Start animations only after all critical resources are loaded
+const checkAndStartAnimation = () => {
+  if (isImageLoaded.value && isAnimationReady.value) {
+    startEntranceAnimations()
+  }
+}
+
+const startEntranceAnimations = () => {
   const gsap = window.gsap
   
   // Check if GSAP is loaded and refs are available
   if (gsap && heroContent.value && heroImage.value) {
+    console.log('Starting entrance animations')
+    
+    // Create a timeline for coordinated animations
+    const tl = gsap.timeline()
+    
+    // First, ensure content is visible
+    tl.set(document.querySelector('.content-hidden'), { 
+      opacity: 1, 
+      visibility: 'visible' 
+    })
+    
     // Animate hero content children with staggered entrance
     Array.from(heroContent.value.children).forEach((el, i) => {
       if (el.nodeType === 1 && el.tagName) { // Only animate element nodes
-        gsap.from(el, {
+        tl.from(el, {
           opacity: 0,
           y: 30,                    // Slide up from 30px below
-          duration: 1,
-          delay: 0.5 + i * 0.2     // Staggered delay for each element
-        })
+          duration: 0.8,
+          delay: i * 0.1,           // Reduced stagger for smoother flow
+          ease: "power2.out"
+        }, i * 0.1)
       }
     })
     
     // Animate hero image with scale and fade
-    gsap.from(heroImage.value, {
+    tl.from(heroImage.value, {
       opacity: 0,
-      scale: 0.8,                 // Start at 80% scale
+      scale: 0.9,                 // Start at 90% scale for subtler effect
       duration: 1,
-      delay: 0.8
-    })
+      ease: "power2.out"
+    }, 0.3)                       // Start slightly after text begins
+    
+    // Add a subtle floating animation to the avatar
+    tl.to(heroImage.value.querySelector('.hero-avatar'), {
+      y: -10,
+      duration: 2,
+      ease: "power1.inOut",
+      repeat: -1,
+      yoyo: true
+    }, 1.5)
+  } else {
+    console.warn('GSAP not loaded or refs not available')
+    // Fallback: just show content without animation
+    const content = document.querySelector('.content-hidden')
+    if (content) {
+      content.style.opacity = '1'
+      content.style.visibility = 'visible'
+    }
   }
+}
+
+// GSAP ANIMATIONS INITIALIZATION
+// ==============================
+// Runs after component is mounted, but waits for image loading
+onMounted(() => {
+  console.log('Home component mounted, starting image preload')
+  
+  // Mark that component is ready for animation
+  isAnimationReady.value = true
+  
+  // Start preloading critical images
+  preloadCriticalImages()
+  
+  // Also check if the image in the DOM is already loaded (for faster subsequent visits)
+  if (profileImage.value) {
+    if (profileImage.value.complete && profileImage.value.naturalHeight !== 0) {
+      // Image is already fully loaded
+      console.log('Profile image already cached and loaded')
+      onImageLoaded()
+    } else {
+      // Image is still loading, events will handle completion
+      console.log('Profile image still loading, waiting for load event')
+    }
+  }
+  
+  // Fallback timeout to ensure page doesn't stay hidden too long
+  setTimeout(() => {
+    if (!isImageLoaded.value) {
+      console.warn('Image loading timeout, proceeding with animation')
+      isImageLoaded.value = true
+      checkAndStartAnimation()
+    }
+  }, 3000) // 3 second timeout
 })
 
 </script>
@@ -356,19 +512,6 @@ onMounted(() => {
   position: relative;
   overflow: hidden;
   min-height: 100vh; /* Or adjust as needed for content within router-view */
-}
-
-.hero-avatar {
-  border: 5px solid transparent; /* Increased border width and made transparent to allow background to show */
-  background-image: linear-gradient(white, white), linear-gradient(45deg, #ec9a9a, #f4b1b1); /* White inner, gradient outer */
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  box-shadow: 0 0 35px rgba(236, 154, 154, 0.4); /* Slightly enhanced shadow */
-  transition: all 0.3s ease;
-  max-width: 320px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 50%; /* Ensure it remains circular */
 }
 
 .hero-quote {
@@ -454,6 +597,95 @@ onMounted(() => {
   }
 }
 
+
+/* LOADING OVERLAY STYLES
+   =====================
+   Full-screen loading overlay with spinner and smooth transitions */
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #fef7f7 0%, #fdf2f8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading-content {
+  text-align: center;
+  color: #f06292;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(240, 98, 146, 0.2);
+  border-left: 4px solid #f06292;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.loading-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #f06292;
+  margin: 0;
+  opacity: 0.8;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* CONTENT VISIBILITY CONTROLS
+   ===========================
+   Hide content until all assets are loaded */
+
+.content-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: none; /* Remove transition to prevent flickering */
+}
+
+/* When content becomes visible */
+.content-hidden:not(.content-hidden) {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* HERO AVATAR ENHANCEMENTS
+   ========================
+   Improved styling for profile image */
+
+.hero-avatar {
+  border: 5px solid transparent;
+  background-image: linear-gradient(white, white), linear-gradient(45deg, #ec9a9a, #f4b1b1);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 0 0 35px rgba(236, 154, 154, 0.4);
+  transition: all 0.3s ease;
+  max-width: 320px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  /* Ensure image loads with proper aspect ratio */
+  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
+}
+
+.hero-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 45px rgba(236, 154, 154, 0.6);
+}
 
 /* Copied from App.vue for sections, adjust if they are global */
 .bg-light-secondary {

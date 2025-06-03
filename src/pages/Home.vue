@@ -9,23 +9,18 @@
       3. Projects showcase section
       4. Skills/technologies section
     -->
-    
-    <!-- Hero Section with Integrated About -->
-    <section class="hero py-5 mt-5" id="hero">
+      <!-- Hero Section with Integrated About -->
+    <section class="hero py-3 mt-3" id="hero">
       <div class="container px-4" style="position: relative; z-index: 3;">
-        
-        <!-- Main Hero Content - Split layout: text left, image right -->
-        <div class="row align-items-center min-vh-60 mb-5">
-          
-          <!-- Left Column: Personal Introduction -->
-          <div class="col-lg-6 mb-4 mb-lg-0" ref="heroContent">
+          <!-- Main Hero Content - Split layout: text left, image right -->
+        <div class="row align-items-center min-vh-40 mb-3">
+            <!-- Left Column: Personal Introduction -->          <div class="col-lg-6 mb-3 mb-lg-0" ref="heroContent">
             <!-- Main Name Title with gradient text effect -->
-            <h1 class="display-4 fw-bold mb-3" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">LI YIN CHUNG</h1>
-            
-            <!-- Professional Title -->
-            <h2 class="h3 mb-4" style="color: #ec9a9a;">Web Developer & AI Enthusiast</h2>
+            <h1 class="display-4 fw-bold mb-2 gradient-text">LI YIN CHUNG, Hugo</h1>
+              <!-- Professional Title -->
+            <h2 class="h3 mb-3 professional-title">Web Developer & AI Enthusiast</h2>
               <!-- Hero Quote with Cherry Blossoms Animation -->
-            <div class="hero-quote mb-4" style="position: relative; overflow: hidden;">
+            <div class="hero-quote mb-3" style="position: relative; overflow: hidden;">
               <!-- Cherry Blossoms Animation Container - positioned absolutely for floating effect -->
               <div class="cherry-blossoms">
                 <!-- Generate 8 animated cherry blossom emojis with random properties -->
@@ -52,7 +47,7 @@
           
           <!-- Right Column: Profile Image -->
           <div class="col-lg-6 text-center" ref="heroImage">
-            <img src="../assets/IMG_3399.jpg" alt="LI YIN CHUNG Profile Photo" class="img-fluid rounded-circle shadow-lg hero-avatar" style="object-fit: cover; object-position: center;" />
+            <img src="../assets/IMG_3399.jpg" alt="LI YIN CHUNG, Hugo Profile Photo" class="img-fluid rounded-circle shadow-lg hero-avatar" style="object-fit: cover; object-position: center;" />
           </div>
         </div>
 
@@ -331,6 +326,31 @@ onMounted(() => {
 /* Styles specific to Home.vue content, if any, can go here */
 /* Most styles are likely global or in App.vue, but hero-specific ones could be here */
 
+/* Clean and elegant typography for the main title */
+.gradient-text {
+  /* Use elegant serif font for the name */
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 600;
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+  color: #2d3748;
+  line-height: 1.2;
+  padding: 0.1em 0;
+  display: inline-block;
+}
+
+
+
+/* Professional title styling - simple and clean */
+.professional-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: #f06292; /* 淺一點的櫻花粉紅色 */
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
 .hero {
   background: none; /* Explicitly remove background */
   position: relative;
@@ -352,13 +372,45 @@ onMounted(() => {
 }
 
 .hero-quote {
-  /* Styles for hero quote, if they were in App.vue and specific to hero */
-  position: relative; /* Ensure this is set for absolute positioning of blossoms */
-  padding: 1rem;
+  position: relative;
+  padding: 1.2rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
-  margin-bottom: 1.5rem; /* Add some space below the quote block */
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 155, 179, 0.3);
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
+
+/* Japanese quote text styling - simple */
+.hero-quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #f06292; /* 淺一點的櫻花粉紅色 */
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+/* English translation styling - clean */
+.hero-quote-translation {
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #f06292; /* 淺一點的櫻花粉紅色 */
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+/* Philosophy paragraph styling - minimal */
+.hero-quote-meaning {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #374151; /* Standard text color */
+  text-align: left;
+  font-weight: 400;
 }
 
 .cherry-blossoms {
@@ -372,14 +424,13 @@ onMounted(() => {
   overflow: hidden; /* Keep blossoms contained */
 }
 .cherry-blossom {
-  /* Styles for individual cherry blossom */
   position: absolute;
   font-size: var(--size, 1rem);
-  color: #ec9a9a; /* Pink color for blossoms */
-  animation: fall var(--duration, 8s) var(--delay, 0s) linear infinite, 
-             sway 3s ease-in-out infinite alternate;
-  opacity: 0.8;
-  left: var(--x-start, 50%); /* Start position */
+  color: #f4a2b8; /* Soft sakura pink */
+  animation: fall var(--duration, 10s) var(--delay, 0s) linear infinite, 
+             sway 4s ease-in-out infinite alternate;
+  opacity: 0.6;
+  left: var(--x-start, 50%);
   user-select: none;
 }
 
@@ -487,8 +538,50 @@ onMounted(() => {
   letter-spacing: 0.01em;
 }
 
-/* Responsive adjustments if specific to home content */
+/* Responsive adjustments - simplified */
+@media (max-width: 768px) {
+  .professional-title {
+    font-size: 1rem;
+  }
+  
+  .hero-quote {
+    padding: 1.2rem;
+  }
+  
+  .hero-quote-text {
+    font-size: 1.2rem;
+  }
+  
+  .hero-quote-translation {
+    font-size: 1rem;
+  }
+  
+  .hero-quote-meaning {
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 576px) {
+  .professional-title {
+    font-size: 0.9rem;
+  }
+  
+  .hero-quote {
+    padding: 1rem;
+  }
+  
+  .hero-quote-text {
+    font-size: 1.1rem;
+  }
+  
+  .hero-quote-translation {
+    font-size: 0.95rem;
+  }
+  
+  .hero-quote-meaning {
+    font-size: 0.85rem;
+  }
+
   .skill-name {
     font-size: 0.8rem;
     min-height: 2rem;

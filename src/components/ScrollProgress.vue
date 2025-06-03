@@ -74,25 +74,25 @@ onUnmounted(() => {
 
 /* PROGRESS CONTAINER
    ==================
-   Fixed container at top of page with glassmorphism background */
+   Fixed container at top of page with cherry blossom themed background */
 .scroll-progress-container {
   position: fixed;                                                 /* Fixed position at top of viewport */
   top: 0;                                                          /* Align to top edge */
   left: 0;                                                         /* Align to left edge */
   width: 100%;                                                     /* Full width across viewport */
   height: 3px;                                                     /* Thin 3px height for subtle presence */
-  background: rgba(255, 255, 255, 0.1);                          /* Semi-transparent white background */
+  background: rgba(255, 240, 245, 0.3);                          /* Light cherry blossom pink background */
   z-index: 9999;                                                  /* High z-index to appear above all content */
   backdrop-filter: blur(10px);                                    /* Glassmorphism blur effect */
 }
 
 /* PROGRESS BAR
    ============
-   The actual progress indicator with gradient colors and smooth animation */
+   The actual progress indicator with cherry blossom gradient colors and smooth animation */
 .scroll-progress-bar {
   height: 100%;                                                    /* Fill container height */
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);          /* Purple to violet gradient */
+  background: linear-gradient(90deg, #f06292, #ff8a95);          /* Cherry blossom pink gradient */
   transition: width 0.1s ease-out;                               /* Smooth width animation during scroll */
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);                  /* Subtle glow effect */
+  box-shadow: 0 0 10px rgba(240, 98, 146, 0.4);                  /* Subtle cherry blossom glow effect */
 }
 </style>

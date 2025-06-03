@@ -225,8 +225,7 @@ This portfolio is open for inspiration and learning. Feel free to:
 
 **Hugo Li**  
 📧 Email: hugoapple213@gmail.com  
-🌍 Location: Hong Kong  
-💼 LinkedIn: [Your LinkedIn Profile]  
+🌍 Location: Hong Kong   
 🐙 GitHub: [HugoLi0213](https://github.com/HugoLi0213)
 
 ---

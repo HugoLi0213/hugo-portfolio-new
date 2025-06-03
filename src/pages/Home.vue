@@ -1,21 +1,38 @@
 <template>
   <div>
+    <!-- 
+      HOME PAGE TEMPLATE
+      ===================
+      This is the main homepage layout containing:
+      1. Hero section with personal introduction and cherry blossom animation
+      2. About section with education and specialties
+      3. Projects showcase section
+      4. Skills/technologies section
+    -->
+    
     <!-- Hero Section with Integrated About -->
     <section class="hero py-5 mt-5" id="hero">
       <div class="container px-4" style="position: relative; z-index: 3;">
-        <!-- Main Hero Content -->
+        
+        <!-- Main Hero Content - Split layout: text left, image right -->
         <div class="row align-items-center min-vh-60 mb-5">
+          
+          <!-- Left Column: Personal Introduction -->
           <div class="col-lg-6 mb-4 mb-lg-0" ref="heroContent">
+            <!-- Main Name Title with gradient text effect -->
             <h1 class="display-4 fw-bold mb-3" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">LI YIN CHUNG</h1>
-            <h2 class="h3 mb-4" style="color: #ec9a9a;">Web Developer & AI Enthusiast</h2>
             
-            <!-- Hero Quote with Cherry Blossoms -->
+            <!-- Professional Title -->
+            <h2 class="h3 mb-4" style="color: #ec9a9a;">Web Developer & AI Enthusiast</h2>
+              <!-- Hero Quote with Cherry Blossoms Animation -->
             <div class="hero-quote mb-4" style="position: relative; overflow: hidden;">
-              <!-- Cherry Blossoms Animation -->
+              <!-- Cherry Blossoms Animation Container - positioned absolutely for floating effect -->
               <div class="cherry-blossoms">
+                <!-- Generate 8 animated cherry blossom emojis with random properties -->
                 <div v-for="i in 8" :key="i" class="cherry-blossom" :style="getBlossomStyle(i)">🌸</div>
               </div>
               
+              <!-- Quote Content - Japanese quote with translation and meaning -->
               <div class="hero-quote-text">「桜の花は、全力で咲き誇り、命をかけて景色を作り出す」</div>
               <div class="hero-quote-translation">"Cherry blossoms bloom with all their might, creating scenery with their very lives"</div>
               <div class="hero-quote-meaning">
@@ -23,7 +40,8 @@
               </div>
             </div>
             
-            <div class="d-flex gap-3 flex-wrap"> <!-- Changed gap-4 to gap-3 and added flex-wrap -->
+            <!-- Navigation Links - Quick access to different sections and external profiles -->
+            <div class="d-flex gap-3 flex-wrap">
               <a :href="linkedin" target="_blank" class="text-decoration-none hover-effect" style="color: #4b5563;"><i class="fab fa-linkedin me-2"></i>LinkedIn</a>
               <a :href="github" target="_blank" class="text-decoration-none hover-effect" style="color: #4b5563;"><i class="fab fa-github me-2"></i>GitHub</a>
               <a :href="'mailto:' + email" class="text-decoration-none hover-effect" style="color: #4b5563;"><i class="fas fa-envelope me-2"></i>Email</a>
@@ -31,29 +49,38 @@
               <a href="#skills" class="text-decoration-none hover-effect" style="color: #4b5563;"><i class="fas fa-cogs me-2"></i>Skills</a>
             </div>
           </div>
+          
+          <!-- Right Column: Profile Image -->
           <div class="col-lg-6 text-center" ref="heroImage">
             <img src="../assets/IMG_3399.jpg" alt="LI YIN CHUNG Profile Photo" class="img-fluid rounded-circle shadow-lg hero-avatar" style="object-fit: cover; object-position: center;" />
           </div>
         </div>
 
-        <!-- Integrated About Content -->
+        <!-- About Section - Education and Specialties Cards -->
         <div class="row justify-content-center">
           <div class="col-lg-10">
-            <!-- About Details -->
             <div class="row g-4">
+              
+              <!-- Education Card -->
               <div class="col-md-6">
                 <div class="card border-0 shadow-lg h-100" style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);">
                   <div class="card-body p-4">
                     <h5 class="mb-3" style="color: #ec9a9a;"><i class="fas fa-graduation-cap me-2"></i>Education</h5>
+                    
+                    <!-- Current Education -->
                     <p class="mb-1" style="color: #374151;">
                       <strong>Bachelor of Computer Science</strong><br>
                       <small style="color: #6b7280; font-weight: bold; font-size: 1.1em; letter-spacing: 0.02em;">HK Metropolitan University (2025)</small>
                     </p>
+                    
+                    <!-- Link to completed courses -->
                     <p class="mb-3" style="color: #4b5563;">
                       <a href="https://gorgeous-cardigan-bf1.notion.site/Completed-course-2056edaa848380cabfebee176b41af3b" target="_blank" class="text-decoration-none hover-effect" style="color: #ec9a9a; font-size: 0.9rem;">
                         <i class="fas fa-external-link-alt me-1"></i>View Completed Courses
                       </a>
                     </p>
+                    
+                    <!-- Previous Education -->
                     <p class="mb-0" style="color: #374151;">
                       <strong>Higher Diploma in Data Science</strong><br>
                       <small style="color: #6b7280; font-weight: bold; font-size: 1.1em; letter-spacing: 0.02em;">HKU SPACE (2023)</small>
@@ -61,10 +88,14 @@
                   </div>
                 </div>
               </div>
+              
+              <!-- Specialties Card -->
               <div class="col-md-6">
                 <div class="card border-0 shadow-lg h-100" style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);">
                   <div class="card-body p-4">
                     <h5 class="mb-3" style="color: #ec9a9a;"><i class="fas fa-concierge-bell me-2"></i>Specialties</h5>
+                    
+                    <!-- Two-column layout for specialties -->
                     <div class="row">
                       <div class="col-6">
                         <p class="small mb-2 specialty-highlight">Web Development</p>
@@ -84,19 +115,27 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Projects Section -->
+    </section>    <!-- Projects Section - Showcases portfolio projects with GitHub links and live demos -->
     <AnimatedSection title="My Creative & Technical Projects" subtitle="A showcase of my best work and collaborations." id="projects" bgClass="bg-light-secondary">
       <div class="row g-4">
+        <!-- Project Card Loop - Displays each project from the projects array -->
         <div class="col-md-6 col-lg-4" v-for="project in projects" :key="project.title">
           <div class="card h-100 shadow-lg hover-card">
             <div class="card-body p-4">
-              <h3 class="h5 card-title fw-bold" style="color: #1f2937;"><i :class="project.icon + ' me-2'" style="color: #ec9a9a;"></i>{{ project.title }}</h3>
+              <!-- Project Title with Icon -->
+              <h3 class="h5 card-title fw-bold" style="color: #1f2937;">
+                <i :class="project.icon + ' me-2'" style="color: #ec9a9a;"></i>{{ project.title }}
+              </h3>
+              
+              <!-- Project Description -->
               <p class="card-text" style="color: #4b5563;">{{ project.description }}</p>
+              
+              <!-- Technology Tags - Shows technologies used in the project -->
               <div class="d-flex flex-wrap gap-2 mb-3">
                 <span v-for="tag in project.tags" :key="tag" class="badge" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); color: white;">{{ tag }}</span>
               </div>
+              
+              <!-- Action Buttons - GitHub link (always) and Live Demo (if available) -->
               <a :href="project.link" target="_blank" class="btn btn-outline-primary w-100 mb-2">View on GitHub</a>
               <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-outline-success w-100">Live Demo</a>
             </div>
@@ -105,13 +144,16 @@
       </div>
     </AnimatedSection>
 
-    <!-- Skills Section -->
+    <!-- Skills Section - Displays technical skills and tools in a grid layout -->
     <AnimatedSection title="My Technical Skillset & Proficiencies" subtitle="Technologies, tools, and platforms I use." id="skills" bgClass="bg-light-tertiary">
       <div class="row g-4">
+        <!-- Skill Card Loop - Shows each skill with icon and name -->
         <div class="col-6 col-md-4 col-lg-3" v-for="skill in skills" :key="skill.name">
           <div class="card h-100 text-center shadow-lg hover-card">
             <div class="card-body p-3">
+              <!-- Skill Icon -->
               <i :class="skill.icon + ' fa-2x mb-2'" style="color: #ec9a9a;"></i>
+              <!-- Skill Name -->
               <p class="card-text mb-0 fw-medium skill-name" style="color: #1f2937;">{{ skill.name }}</p>
             </div>
           </div>
@@ -122,16 +164,37 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import AnimatedSection from '../components/AnimatedSection.vue'; // Adjusted path
+/*
+  HOME PAGE SCRIPT
+  ================
+  This script handles the logic for the homepage including:
+  - Vue composition API imports
+  - Component imports
+  - Data definitions (projects, skills, social links)
+  - Animation functions
+  - Lifecycle hooks for GSAP animations
+*/
 
-// Props for social media links (passed from App.vue or defined here if only for hero)
-// For simplicity, we'll redefine them here. If they are needed globally, consider props or provide/inject.
+// Vue Composition API imports
+import { onMounted, ref } from 'vue';
+import AnimatedSection from '../components/AnimatedSection.vue';
+
+// CONTACT & SOCIAL MEDIA LINKS
+// ===========================
+// These could be moved to a config file or store for better maintainability
 const linkedin = 'https://www.linkedin.com/in/hugo-li-77a0581b0/'
 const github = 'https://github.com/HugoLi0213'
-const email = 's12332146@gmail.com'
+const email = 'hugoapple213@gmail.com'
 
-// Project data
+// PROJECT PORTFOLIO DATA
+// ======================
+// Array of project objects containing:
+// - title: Project name
+// - description: Brief project overview
+// - tags: Technologies/skills used
+// - link: GitHub repository URL
+// - demo: Live demo URL (optional)
+// - icon: FontAwesome icon class
 const projects = [
   {
     title: "WeatherApp",
@@ -175,57 +238,87 @@ const projects = [
   }
 ];
 
-// Skills data
+// TECHNICAL SKILLS DATA
+// =====================
+// Array of skill objects containing:
+// - name: Technology/tool name
+// - icon: FontAwesome icon class
+// Skills are organized by tool categories for better grouping
 const skills = [
+  // Programming Languages
   { name: "JavaScript", icon: "fab fa-js-square" },
   { name: "Python", icon: "fab fa-python" },
+  
+  // Frontend Technologies
   { name: "HTML5", icon: "fab fa-html5" },
   { name: "CSS3", icon: "fab fa-css3-alt" },
   { name: "React.js", icon: "fab fa-react" },
   { name: "React Native", icon: "fab fa-react" },
   { name: "Vue.js", icon: "fab fa-vuejs" },
-  { name: "GenAI", icon: "fas fa-robot" },
-  { name: "Business Analysis", icon: "fas fa-chart-line" },
-  { name: "Microsoft Office", icon: "fas fa-file-word" },
+  
+  // Development Tools
+  { name: "VS Code", icon: "fas fa-code" },
+  { name: "Cursor", icon: "fas fa-mouse-pointer" },
   { name: "GitHub", icon: "fab fa-github" },
+  
+  // Design Tools
   { name: "Figma", icon: "fab fa-figma" },
   { name: "Canva", icon: "fas fa-paint-brush" },
-  { name: "Cursor", icon: "fas fa-mouse-pointer" },
+  
+  // AI & Analysis Tools
+  { name: "GenAI", icon: "fas fa-robot" },
+  { name: "Perplexity", icon: "fas fa-search" },
+  { name: "Business Analysis", icon: "fas fa-chart-line" },
+  
+  // Office & Productivity
+  { name: "Microsoft Office", icon: "fas fa-file-word" },
 ]
 
-// Animation references
+// ANIMATION REFERENCES
+// ===================
+// Vue refs for GSAP animation targets
 const heroContent = ref(null)
 const heroImage = ref(null)
 
-// Cherry blossom animation function
+// CHERRY BLOSSOM ANIMATION FUNCTION
+// ================================
+// Generates random CSS custom properties for each cherry blossom
+// Returns object with CSS variables for animation timing and positioning
 const getBlossomStyle = (index) => {
   return {
-    '--delay': Math.random() * 10 + 's',
-    '--duration': (Math.random() * 3 + 5) + 's',
-    '--x-start': Math.random() * 100 + '%',
-    '--x-end': (Math.random() * 100) + '%',
-    '--size': (Math.random() * 0.8 + 0.6) + 'rem',
-    '--rotation': Math.random() * 360 + 'deg'
+    '--delay': Math.random() * 10 + 's',        // Random delay 0-10s
+    '--duration': (Math.random() * 3 + 5) + 's', // Random duration 5-8s
+    '--x-start': Math.random() * 100 + '%',      // Random start position
+    '--x-end': (Math.random() * 100) + '%',      // Random end position
+    '--size': (Math.random() * 0.8 + 0.6) + 'rem', // Random size 0.6-1.4rem
+    '--rotation': Math.random() * 360 + 'deg'     // Random rotation
   }
 }
 
-// Initialize animations
+// GSAP ANIMATIONS INITIALIZATION
+// ==============================
+// Runs after component is mounted to animate hero elements
 onMounted(() => {
   const gsap = window.gsap
+  
+  // Check if GSAP is loaded and refs are available
   if (gsap && heroContent.value && heroImage.value) {
+    // Animate hero content children with staggered entrance
     Array.from(heroContent.value.children).forEach((el, i) => {
-      if (el.nodeType === 1 && el.tagName) {
+      if (el.nodeType === 1 && el.tagName) { // Only animate element nodes
         gsap.from(el, {
           opacity: 0,
-          y: 30,
+          y: 30,                    // Slide up from 30px below
           duration: 1,
-          delay: 0.5 + i * 0.2
+          delay: 0.5 + i * 0.2     // Staggered delay for each element
         })
       }
     })
+    
+    // Animate hero image with scale and fade
     gsap.from(heroImage.value, {
       opacity: 0,
-      scale: 0.8,
+      scale: 0.8,                 // Start at 80% scale
       duration: 1,
       delay: 0.8
     })

@@ -226,7 +226,22 @@ const email = 'hugoapple213@gmail.com'
 // - link: GitHub repository URL
 // - demo: Live demo URL (optional)
 // - icon: FontAwesome icon class
-const projects = [
+const projects = [  {
+    title: "Hong Kong Weather Cloudsea",
+    description: "A modern weather app with cloudsea prediction for Hong Kong. Features HKO API integration, inversion layer analysis, and Apple Weather-style design with real-time data updates.",
+    tags: ["React", "TypeScript", "API", "Weather", "HKO", "Tailwind CSS", "Open-Meteo"],
+    link: "https://github.com/HugoLi0213/Hong-Kong-Weather-Cloudsea",
+    demo: "https://hong-kong-weather-cloudsea.vercel.app/",
+    icon: "fas fa-cloud-rain"
+  },
+  {
+    title: "HKMTRVUE - MTR & LRT Real-time Arrivals",
+    description: "A Vue.js app providing real-time MTR and Light Rail schedules with traditional timetable view design. Perfect companion to Google Maps for Hong Kong transit navigation.",
+    tags: ["Vue.js", "TypeScript", "Government API", "Transportation", "Real-time Data", "PWA"],
+    link: "https://github.com/HugoLi0213/hkmtrvue",
+    demo: "https://hk-mtr-lrt-vue-app.vercel.app/",
+    icon: "fas fa-train"
+  },
   {
     title: "WeatherApp",
     description: "A simple weather application that fetches and displays weather data for any city.",

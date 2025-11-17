@@ -1,27 +1,54 @@
+.animated-section-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.simple-hero__shell {
+  width: min(100%, 820px);
+}
+
+.container-condensed {
+  max-width: 1040px;
+  margin: 0 auto;
+}
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', 'SF Pro Display', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  /* Light cherry blossom theme color scheme */
   color-scheme: light;
-  color: #374151;
-  background-color: #fef7f7;
+  color: #1f2937;
+  background-color: #f8f6f4;
 
-  /* Custom CSS variables for light cherry blossom theme */
-  --bg-primary: #fef7f7;
-  --bg-secondary: #fdf2f8;
-  --bg-tertiary: #fce7f3;
-  --text-primary: #1f2937;
-  --text-secondary: #374151;
-  --text-muted: #4b5563;
-  --accent-primary: #ffffff; /* Changed from #d946ef to white */
-  --accent-secondary: #ffffff; /* Changed from #f472b6 to white */
-  --accent-tertiary: #ffb7c5; /* Kept as is */
-  --border-primary: rgba(255, 255, 255, 0.1); /* Changed from rgba(217, 70, 239, 0.1) to white with alpha */
-  --border-secondary: rgba(255, 255, 255, 0.2); /* Changed from rgba(217, 70, 239, 0.2) to white with alpha */
-  --shadow-primary: rgba(255, 255, 255, 0.1); /* Changed from rgba(217, 70, 239, 0.1) to white with alpha */
-  --shadow-secondary: rgba(255, 255, 255, 0.2); /* Changed from rgba(217, 70, 239, 0.2) to white with alpha */
+  /* Custom CSS variables for airy layout */
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', 'SF Pro Text', system-ui, sans-serif;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  --bg-primary: #f9f8f6;
+  --bg-secondary: #fdfdfc;
+  --bg-tertiary: #f3f2ef;
+  --surface-paper: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.92);
+  --surface-strong: rgba(15, 23, 42, 0.04);
+  --ink-primary: #0f172a;
+  --ink-secondary: #1f2937;
+  --ink-muted: #475467;
+  --text-primary: var(--ink-secondary);
+  --text-secondary: var(--ink-muted);
+  --text-muted: #64748b;
+  --accent-primary: #5563de;
+  --accent-secondary: #a0aec0;
+  --accent-tertiary: #fcd6c2;
+  --border-primary: rgba(15, 23, 42, 0.08);
+  --border-secondary: rgba(99, 102, 241, 0.15);
+  --shadow-primary: 0 18px 45px rgba(15, 23, 42, 0.08);
+  --shadow-secondary: 0 25px 55px rgba(15, 23, 42, 0.1);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,10 +59,24 @@
 /* Global light theme overrides */
 body {
   margin: 0;
-  background-color: var(--bg-primary) !important; /* Reverted to theme's primary background */
+  background: var(--bg-primary) !important;
   color: var(--text-primary) !important;
   min-width: 320px;
   min-height: 100vh;
+  font-family: var(--font-body);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+p,
+li {
+  line-height: 1.7;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.text-balanced {
+  text-wrap: balance;
 }
 
 /* Bootstrap overrides for light cherry blossom theme */
@@ -126,9 +167,11 @@ button:focus-visible {
 }
 
 .card {
-  background: var(--bg-secondary) !important;
+  background: var(--surface-paper) !important;
   border: 1px solid var(--border-primary) !important;
   color: var(--text-primary) !important;
+  box-shadow: var(--shadow-primary);
+  border-radius: var(--radius-md) !important;
 }
 
 #app {
@@ -230,8 +273,8 @@ button:focus-visible {
     font-size: 2.5rem;
   }
   .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
 }
 
@@ -240,8 +283,8 @@ button:focus-visible {
     font-size: 2rem;
   }
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .card-body {
     padding: 0.75rem !important;
@@ -278,6 +321,237 @@ html {
 }
 
 section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* ===== Professional Hero Refresh ===== */
+.pro-hero {
+  background: var(--bg-primary);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-secondary);
+  position: relative;
+}
+
+.typography-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 640px;
+}
+
+.eyebrow-text {
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.professional-title {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.hero-lead {
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  max-width: 42rem;
+}
+
+.professional-pill {
+  background: rgba(85, 99, 222, 0.05);
+  border: 1px solid rgba(85, 99, 222, 0.18);
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  color: var(--ink-primary);
+}
+
+.cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cta-primary,
+.cta-secondary {
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.cta-primary {
+  background: #f4f5fb;
+  color: var(--ink-primary);
+  border: 1px solid rgba(85, 99, 222, 0.3);
+}
+
+.cta-primary:hover {
+  background: rgba(85, 99, 222, 0.08);
+}
+
+.cta-secondary {
+  background: transparent;
+  border-color: rgba(15, 23, 42, 0.15);
+  color: var(--ink-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #faf9f7;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 14px;
+  padding: 0.9rem 1.15rem;
+  box-shadow: none;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.card-soft {
+  background: rgba(248, 247, 245, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-quote {
+  background: transparent;
+}
+
+.hero-quote__decor {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+
+.simple-hero {
+  background: var(--bg-primary);
+}
+
+.simple-hero__shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hero-quote-text {
+  font-family: 'Noto Serif JP', 'Hiragino Sans', serif;
+  font-size: 1rem;
+  color: var(--ink-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.body-small {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.body-medium {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--ink-primary);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.section-subtitle {
+  color: var(--ink-muted);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ===== Project Card Enhancements ===== */
+.project-card {
+  border-radius: var(--radius-md) !important;
+  position: relative;
+}
+
+.project-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
+.project-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--accent-primary);
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+}
+
+.badge-tech {
+  background: rgba(99, 102, 241, 0.06) !important;
+  color: var(--ink-primary) !important;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+}
+
+.project-card__actions .btn {
+  border-radius: 999px;
+}
+
+.skill-card {
+  border-radius: var(--radius-md) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(15, 23, 42, 0.05) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.skill-card .card-body {
+  gap: 0.5rem;
+}
+
+@media (max-width: 992px) {
+  .pro-hero {
+    border-radius: 24px;
+  }
 }

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- Main Content - Hidden until loading complete -->
-    <div :class="{ 'content-hidden': !isImageLoaded }">
+    <div>
       <!-- 
         HOME PAGE TEMPLATE
         ===================
@@ -12,29 +11,32 @@
         4. Skills/technologies section
       -->
       <!-- Hero Section with Integrated About -->
-    <section class="hero py-3 mt-3" id="hero">
-      <div class="container px-4" style="position: relative; z-index: 3;">
-          <!-- Main Hero Content - Split layout: text left, image right -->
-        <div class="row align-items-center min-vh-40 mb-3">
-            <!-- Left Column: Personal Introduction -->          <div class="col-lg-6 mb-3 mb-lg-0" ref="heroContent">
-            <!-- Main Name Title with gradient text effect -->
-            <h1 class="display-4 fw-bold mb-2 gradient-text">LI YIN CHUNG, Hugo</h1>
-              <!-- Professional Title -->
-            <h2 class="h3 mb-3 professional-title">Web Developer & AI Enthusiast</h2>
-              <!-- Hero Quote with Cherry Blossoms Animation -->
-            <div class="hero-quote mb-3" style="position: relative; overflow: hidden;">
-              <!-- Cherry Blossoms Animation Container - positioned absolutely for floating effect -->
-              <div class="cherry-blossoms">
-                <!-- Generate 8 animated cherry blossom emojis with random properties -->
-                <div v-for="i in 8" :key="i" class="cherry-blossom" :style="getBlossomStyle(i)">🌸</div>
+    <section class="hero pro-hero simple-hero py-4 mt-4" id="hero">
+      <div class="container px-4 container-condensed" style="position: relative; z-index: 3;">
+        <div class="simple-hero__shell" ref="heroContent">
+            <p class="eyebrow-text text-uppercase mb-2">Systems-grade frontend for IT teams</p>
+            <h1 class="display-4 fw-bold mb-2 gradient-text text-balanced">LI YIN CHUNG, Hugo</h1>
+            <h2 class="h3 mb-3 professional-title text-balanced">Web Developer & AI Enthusiast</h2>
+            <p class="lead hero-lead mb-4 text-balanced">Designing resilient web experiences with measurable KPIs for technology, operations, and data teams across Hong Kong.</p>
+            <div class="professional-pill mb-4 body-medium">
+              Shipping React/Vue/Next.js systems with AI workflows, performance budgets, and production-ready observability.
+            </div>
+            <div class="cta-group mb-5">
+              <a href="#projects" class="btn cta-primary">View case studies</a>
+              <a :href="'mailto:' + email" class="btn cta-secondary">Book a call</a>
+            </div>
+            <div class="stats-grid mb-5">
+              <div class="stat-card" v-for="stat in heroStats" :key="stat.label">
+                <div class="stat-value">{{ stat.value }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
               </div>
-              
-              <!-- Quote Content - Japanese quote with translation and meaning -->
-              <div class="hero-quote-text">「桜の花は、全力で咲き誇り、命をかけて景色を作り出す」</div>
-              <div class="hero-quote-translation">"Cherry blossoms bloom with all their might, creating scenery with their very lives"</div>
-              <div class="hero-quote-meaning">
-                A philosophy that resonates deeply with my journey in technology. Like cherry blossoms that bloom with complete dedication, I approach each line of code, every AI model, and each web application with unwavering commitment. Through my Computer Science studies, I believe in pouring my entire essence into creating digital experiences that transform how people interact with technology.
-              </div>
+            </div>
+            <div class="hero-quote card-soft mb-0 text-start">
+              <p class="hero-quote-text text-balanced">「桜の花は、全力で咲き誇り、命をかけて景色を作り出す」</p>
+              <p class="hero-quote-translation body-small text-muted mb-1">"Cherry blossoms bloom with all their might, creating scenery with their very lives"</p>
+              <p class="hero-quote-meaning body-small text-muted mb-0">
+                A philosophy that resonates deeply with my journey in technology. Like cherry blossoms that bloom with complete dedication, I approach each line of code, every AI model, and each web application with unwavering commitment.
+              </p>
             </div>
             
             <!-- Navigation Links - Quick access to different sections and external profiles -->
@@ -45,23 +47,6 @@
               <a href="#projects" class="text-decoration-none hover-effect" style="color: #4b5563;"><i class="fas fa-briefcase me-2"></i>Works</a>
               <a href="#skills" class="text-decoration-none hover-effect" style="color: #4b5563;"><i class="fas fa-cogs me-2"></i>Skills</a>
             </div>
-          </div>
-          
-          <!-- Right Column: Profile Image -->
-          <div class="col-lg-6 text-center" ref="heroImage">
-            <img 
-              ref="profileImage"
-              src="../assets/IMG_3399.jpg" 
-              alt="LI YIN CHUNG, Hugo Profile Photo" 
-              class="img-fluid rounded-circle shadow-lg hero-avatar" 
-              style="object-fit: cover; object-position: center;" 
-              @load="onImageLoaded"
-              @error="onImageError"
-              loading="eager"
-              decoding="sync"
-              fetchpriority="high"
-            />
-          </div>
         </div>
 
         <!-- About Section - Education and Specialties Cards -->
@@ -128,24 +113,32 @@
       <div class="row g-4">
         <!-- Project Card Loop - Displays each project from the projects array -->
         <div class="col-md-6 col-lg-4" v-for="project in projects" :key="project.title">
-          <div class="card h-100 shadow-lg hover-card">
-            <div class="card-body p-4">
+          <div class="card h-100 shadow-lg hover-card project-card">
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="project-card__header mb-3">
+                <span class="project-badge">{{ project.badge }}</span>
+                <span class="project-icon">
+                  <i :class="project.icon"></i>
+                </span>
+              </div>
               <!-- Project Title with Icon -->
-              <h3 class="h5 card-title fw-bold" style="color: #1f2937;">
-                <i :class="project.icon + ' me-2'" style="color: #ec9a9a;"></i>{{ project.title }}
+              <h3 class="h5 card-title fw-bold mb-2" style="color: #0f172a;">
+                {{ project.title }}
               </h3>
               
               <!-- Project Description -->
-              <p class="card-text" style="color: #4b5563;">{{ project.description }}</p>
+              <p class="card-text flex-grow-1" style="color: #4b5563;">{{ project.description }}</p>
               
               <!-- Technology Tags - Shows technologies used in the project -->
               <div class="d-flex flex-wrap gap-2 mb-3">
-                <span v-for="tag in project.tags" :key="tag" class="badge" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); color: white;">{{ tag }}</span>
+                <span v-for="tag in project.tags" :key="tag" class="badge badge-tech">{{ tag }}</span>
               </div>
               
               <!-- Action Buttons - GitHub link (always) and Live Demo (if available) -->
-              <a :href="project.link" target="_blank" class="btn btn-outline-primary w-100 mb-2">View on GitHub</a>
-              <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-outline-success w-100">Live Demo</a>
+              <div class="project-card__actions">
+                <a :href="project.link" target="_blank" class="btn btn-outline-primary w-100 mb-2">Repository</a>
+                <a v-if="project.demo" :href="project.demo" target="_blank" class="btn btn-outline-success w-100">Live Demo</a>
+              </div>
             </div>
           </div>
         </div>
@@ -157,7 +150,7 @@
       <div class="row g-4">
         <!-- Skill Card Loop - Shows each skill with icon and name -->
         <div class="col-6 col-md-4 col-lg-3" v-for="skill in skills" :key="skill.name">
-          <div class="card h-100 text-center shadow-lg hover-card">
+          <div class="card h-100 text-center shadow-lg hover-card skill-card">
             <div class="card-body p-3">
               <!-- Skill Icon -->
               <i :class="skill.icon + ' fa-2x mb-2'" style="color: #ec9a9a;"></i>
@@ -168,14 +161,6 @@
         </div>
       </div>
     </AnimatedSection>
-    </div>
-    
-    <!-- Loading Overlay - Shown while assets are loading -->
-    <div v-if="!isImageLoaded" class="loading-overlay">
-      <div class="loading-content">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Loading...</p>
-      </div>
     </div>
   </div>
 </template>
@@ -200,15 +185,6 @@ import AnimatedSection from '../components/AnimatedSection.vue';
 // ==============
 // Vue refs for GSAP animation targets and image loading
 const heroContent = ref(null)
-const heroImage = ref(null)
-const profileImage = ref(null)
-
-// LOADING STATE
-// =============
-// Track image loading state to ensure smooth entrance
-const isImageLoaded = ref(false)
-const isAnimationReady = ref(false)
-const loadingStartTime = ref(Date.now())
 
 // CONTACT & SOCIAL MEDIA LINKS
 // ===========================
@@ -216,6 +192,15 @@ const loadingStartTime = ref(Date.now())
 const linkedin = 'https://www.linkedin.com/in/hugo-li-77a0581b0/'
 const github = 'https://github.com/HugoLi0213'
 const email = 'hugoapple213@gmail.com'
+
+// HERO METRICS DATA
+// ==================
+// Quick stats that signal professionalism and delivery confidence
+const heroStats = [
+  { label: 'Production launches', value: '12+' },
+  { label: 'Avg. Lighthouse score', value: '95+' },
+  { label: 'Response SLA', value: '<24h' }
+]
 
 // PROJECT PORTFOLIO DATA
 // ======================
@@ -226,13 +211,25 @@ const email = 'hugoapple213@gmail.com'
 // - link: GitHub repository URL
 // - demo: Live demo URL (optional)
 // - icon: FontAwesome icon class
-const projects = [  {
+// - badge: Quick context for stakeholders
+const projects = [
+  {
+    title: "Hong Kong A&E Waits",
+    description: "Real-time dashboard for Hong Kong Hospital Authority wait times with bilingual UI, severity tiers, and live refresh backed by official data.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Hospital Authority API", "Realtime", "Accessibility"],
+    link: "https://github.com/HugoLi0213/Hong-Kong-A-E-Waits",
+    demo: "https://hk-hospital-wait-times-sigma.vercel.app/",
+    icon: "fas fa-hospital-user",
+    badge: "Healthcare Ops"
+  },
+  {
     title: "Hong Kong Weather Cloudsea",
     description: "A modern weather app with cloudsea prediction for Hong Kong. Features HKO API integration, inversion layer analysis, and Apple Weather-style design with real-time data updates.",
     tags: ["React", "TypeScript", "API", "Weather", "HKO", "Tailwind CSS", "Open-Meteo"],
     link: "https://github.com/HugoLi0213/Hong-Kong-Weather-Cloudsea",
     demo: "https://hong-kong-weather-cloudsea.vercel.app/",
-    icon: "fas fa-cloud-rain"
+    icon: "fas fa-cloud-rain",
+    badge: "Climate Intelligence"
   },
   {
     title: "HKMTRVUE - MTR & LRT Real-time Arrivals",
@@ -240,7 +237,8 @@ const projects = [  {
     tags: ["Vue.js", "TypeScript", "Government API", "Transportation", "Real-time Data", "PWA"],
     link: "https://github.com/HugoLi0213/hkmtrvue",
     demo: "https://hk-mtr-lrt-vue-app.vercel.app/",
-    icon: "fas fa-train"
+    icon: "fas fa-train",
+    badge: "Transit Reliability"
   },
   {
     title: "WeatherApp",
@@ -248,7 +246,8 @@ const projects = [  {
     tags: ["JavaScript", "API", "Web App", "HTML", "CSS", "React Native"],
     link: "https://github.com/HugoLi0213/weatherapp",
     demo: null,
-    icon: "fas fa-cloud-sun"
+    icon: "fas fa-cloud-sun",
+    badge: "Demo Toolkit"
   },
   {
     title: "PPE Detection & Danger Zone Monitoring",
@@ -256,7 +255,8 @@ const projects = [  {
     tags: ["HTML", "AI", "Computer Vision", "Python", "OpenCV", "Flask", "Jetson Nano", "Linux"],
     link: "https://github.com/HugoLi0213/PPE-Detection-and-Danger-Zone-Monitoring-System",
     demo: null,
-    icon: "fas fa-hard-hat"
+    icon: "fas fa-hard-hat",
+    badge: "Computer Vision"
   },
   {
     title: "SEO Sleuth with AI",
@@ -264,7 +264,8 @@ const projects = [  {
     tags: ["TypeScript", "AI", "SEO", "Node.js", "Express", "React"],
     link: "https://github.com/HugoLi0213/SEO-Sleuth-with-AI",
     demo: "https://seo-henna-two.vercel.app/",
-    icon: "fas fa-search"
+    icon: "fas fa-search",
+    badge: "Growth Automation"
   },
   {
     title: "Sun Yat-Sen Tour Guide",
@@ -272,7 +273,8 @@ const projects = [  {
     tags: ["HTML", "Web Guide", "JavaScript", "Bootstrap", "CSS"],
     link: "https://github.com/HugoLi0213/Sun-Yat-Sen-tour-guid",
     demo: "https://sun-yat-sen-tour-guid.netlify.app/",
-    icon: "fas fa-map-marked-alt"
+    icon: "fas fa-map-marked-alt",
+    badge: "Cultural Tech"
   },
   {
     title: "Hong Kong Date Countdown Web",
@@ -280,7 +282,8 @@ const projects = [  {
     tags: ["Vue.js", "Bootstrap", "Web App", "JavaScript", "HTML", "CSS"],
     link: "https://github.com/HugoLi0213/Hong-Kong-date-countdown-web",
     demo: "https://hong-kong-date-countdown-web.vercel.app/",
-    icon: "fas fa-calendar-alt"
+    icon: "fas fa-calendar-alt",
+    badge: "Experience Design"
   }
 ];
 
@@ -323,7 +326,7 @@ const skills = [
 // ANIMATION REFERENCES
 // ===================
 // Additional refs for loading state management
-// heroContent and heroImage refs are defined above with loading state
+// heroContent ref defined above for entrance animations
 
 // CHERRY BLOSSOM ANIMATION FUNCTION
 // ================================
@@ -340,185 +343,26 @@ const getBlossomStyle = (index) => {
   }
 }
 
-// IMAGE LOADING HANDLERS
-// ======================
-// Handle image loading events to ensure smooth entrance
-const onImageLoaded = () => {
-  console.log('Profile image loaded successfully')
-  
-  // Calculate how long loading has been displayed
-  const elapsedTime = Date.now() - loadingStartTime.value
-  const minLoadingTime = 700 // 0.7 seconds
-  
-  if (elapsedTime >= minLoadingTime) {
-    // Minimum time has passed, show content immediately
-    isImageLoaded.value = true
-    checkAndStartAnimation()
-  } else {
-    // Wait for remaining time before showing content
-    const remainingTime = minLoadingTime - elapsedTime
-    setTimeout(() => {
-      isImageLoaded.value = true
-      checkAndStartAnimation()
-    }, remainingTime)
-  }
-}
-
-const onImageError = () => {
-  console.warn('Profile image failed to load, proceeding with animation')
-  
-  // Apply same minimum loading time even for errors
-  const elapsedTime = Date.now() - loadingStartTime.value
-  const minLoadingTime = 700 // 0.7 seconds
-  
-  if (elapsedTime >= minLoadingTime) {
-    isImageLoaded.value = true
-    checkAndStartAnimation()
-  } else {
-    const remainingTime = minLoadingTime - elapsedTime
-    setTimeout(() => {
-      isImageLoaded.value = true
-      checkAndStartAnimation()
-    }, remainingTime)
-  }
-}
-
-// PRELOAD CRITICAL IMAGES
-// ========================
-// Preload important images to ensure smooth loading experience
-const preloadCriticalImages = () => {
-  const imagePaths = [
-    '../assets/IMG_3399.jpg',
-    '../assets/profile.jpg'  // Backup image if available
-  ]
-  
-  let loadedCount = 0
-  const totalImages = imagePaths.length
-  
-  imagePaths.forEach((path, index) => {
-    const img = new Image()
-    img.onload = () => {
-      loadedCount++
-      console.log(`Preloaded image ${index + 1}/${totalImages}`)
-      
-      // If this is the main profile image, mark as loaded
-      if (index === 0) {
-        onImageLoaded() // Use the updated handler with minimum time logic
-      }
-    }
-    img.onerror = () => {
-      loadedCount++
-      console.warn(`Failed to preload image ${index + 1}/${totalImages}`)
-      
-      // If this is the main profile image and it fails, still proceed
-      if (index === 0) {
-        onImageError() // Use the updated handler with minimum time logic
-      }
-    }
-    img.src = path
-  })
-}
-
-// ANIMATION CONTROL
-// =================
-// Start animations only after all critical resources are loaded
-const checkAndStartAnimation = () => {
-  if (isImageLoaded.value && isAnimationReady.value) {
-    startEntranceAnimations()
-  }
-}
-
 const startEntranceAnimations = () => {
   const gsap = window.gsap
-  
-  // Check if GSAP is loaded and refs are available
-  if (gsap && heroContent.value && heroImage.value) {
-    console.log('Starting entrance animations')
-    
-    // Create a timeline for coordinated animations
+  if (gsap && heroContent.value) {
     const tl = gsap.timeline()
-    
-    // First, ensure content is visible
-    tl.set(document.querySelector('.content-hidden'), { 
-      opacity: 1, 
-      visibility: 'visible' 
-    })
-    
-    // Animate hero content children with staggered entrance
     Array.from(heroContent.value.children).forEach((el, i) => {
-      if (el.nodeType === 1 && el.tagName) { // Only animate element nodes
+      if (el.nodeType === 1 && el.tagName) {
         tl.from(el, {
           opacity: 0,
-          y: 30,                    // Slide up from 30px below
-          duration: 0.8,
-          delay: i * 0.1,           // Reduced stagger for smoother flow
-          ease: "power2.out"
-        }, i * 0.1)
+          y: 24,
+          duration: 0.7,
+          delay: i * 0.08,
+          ease: 'power2.out'
+        }, i * 0.08)
       }
     })
-    
-    // Animate hero image with scale and fade
-    tl.from(heroImage.value, {
-      opacity: 0,
-      scale: 0.9,                 // Start at 90% scale for subtler effect
-      duration: 1,
-      ease: "power2.out"
-    }, 0.3)                       // Start slightly after text begins
-    
-    // Add a subtle floating animation to the avatar
-    tl.to(heroImage.value.querySelector('.hero-avatar'), {
-      y: -10,
-      duration: 2,
-      ease: "power1.inOut",
-      repeat: -1,
-      yoyo: true
-    }, 1.5)
-  } else {
-    console.warn('GSAP not loaded or refs not available')
-    // Fallback: just show content without animation
-    const content = document.querySelector('.content-hidden')
-    if (content) {
-      content.style.opacity = '1'
-      content.style.visibility = 'visible'
-    }
   }
 }
 
-// GSAP ANIMATIONS INITIALIZATION
-// ==============================
-// Runs after component is mounted, but waits for image loading
 onMounted(() => {
-  console.log('Home component mounted, starting image preload')
-  
-  // Record loading start time
-  loadingStartTime.value = Date.now()
-  
-  // Mark that component is ready for animation
-  isAnimationReady.value = true
-  
-  // Start preloading critical images
-  preloadCriticalImages()
-  
-  // Also check if the image in the DOM is already loaded (for faster subsequent visits)
-  if (profileImage.value) {
-    if (profileImage.value.complete && profileImage.value.naturalHeight !== 0) {
-      // Image is already fully loaded
-      console.log('Profile image already cached and loaded')
-      onImageLoaded()
-    } else {
-      // Image is still loading, events will handle completion
-      console.log('Profile image still loading, waiting for load event')
-    }
-  }
-  
-  // Fallback timeout to ensure page doesn't stay hidden too long
-  setTimeout(() => {
-    if (!isImageLoaded.value) {
-      console.warn('Image loading timeout, proceeding with animation')
-      isImageLoaded.value = true
-      checkAndStartAnimation()
-    }
-  }, 700) // 0.7 second timeout
+  startEntranceAnimations()
 })
 
 </script>
@@ -643,111 +487,28 @@ onMounted(() => {
 }
 
 
-/* LOADING OVERLAY STYLES
-   =====================
-   Full-screen loading overlay with spinner and smooth transitions */
-
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #fef7f7 0%, #fdf2f8 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease-out;
-}
-
-.loading-content {
-  text-align: center;
-  color: #f06292;
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(240, 98, 146, 0.2);
-  border-left: 4px solid #f06292;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 1rem;
-}
-
-.loading-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #f06292;
-  margin: 0;
-  opacity: 0.8;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* CONTENT VISIBILITY CONTROLS
-   ===========================
-   Hide content until all assets are loaded */
-
-.content-hidden {
-  opacity: 0;
-  visibility: hidden;
-  transition: none; /* Remove transition to prevent flickering */
-}
-
-/* When content becomes visible */
-.content-hidden:not(.content-hidden) {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* HERO AVATAR ENHANCEMENTS
-   ========================
-   Improved styling for profile image */
-
-.hero-avatar {
-  border: 5px solid transparent;
-  background-image: linear-gradient(white, white), linear-gradient(45deg, #ec9a9a, #f4b1b1);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  box-shadow: 0 0 35px rgba(236, 154, 154, 0.4);
-  transition: all 0.3s ease;
-  max-width: 320px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 50%;
-  /* Ensure image loads with proper aspect ratio */
-  aspect-ratio: 1;
-  width: 100%;
-  height: auto;
-}
-
-.hero-avatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 45px rgba(236, 154, 154, 0.6);
-}
+/* Loading overlay and hero avatar styles removed after simplifying hero */
 
 /* Copied from App.vue for sections, adjust if they are global */
 .bg-light-secondary {
-  background: linear-gradient(135deg, #f5f1ec 0%, #f2ede6 100%) !important;
+  background: #f8f7f4 !important;
 }
 
 .bg-light-tertiary {
-  background: linear-gradient(135deg, #f7f4ef 0%, #f4f0ea 100%) !important;
+  background: #f6f5f2 !important;
 }
 
 .hover-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(236, 154, 154, 0.15) !important;
-  background: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(15, 23, 42, 0.05) !important;
+  background: #ffffff !important;
+  box-shadow: none;
   position: relative;
-  z-index: 2; /* Ensure cards are above any section-level pseudo-elements */
+  z-index: 2;
+}
+
+.hover-card:hover {
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
 }
 
 .hover-card:hover {

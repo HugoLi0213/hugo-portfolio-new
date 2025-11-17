@@ -11,6 +11,9 @@ Like cherry blossoms that bloom with complete dedication, this portfolio represe
 - **🧹 Complete Code Cleanup**: Streamlined codebase with comprehensive documentation
 - **📚 Maintenance Guide**: 300+ line guide for future development and maintenance
 - **🎯 Simplified UI**: Removed time/weather widgets for cleaner navigation
+- **💼 IT-grade Hero Refresh**: Added executive-friendly CTA, delivery metrics, and professional project cards
+- **🪶 Calm Typography System**: Introduced balanced headings, softer cards, and generous spacing for a comfortable reading experience
+- **🕊️ Simple Comfort Redesign**: Minimal hero stack, neutral palettes, and quieter cards for a relaxing browsing experience
 - **📧 Updated Contact**: All email addresses updated to hugoapple213@gmail.com
 - **🔧 Skills Reorganization**: Skills now organized by tool categories instead of alphabetical
 - **📝 Enhanced Documentation**: Every component now has detailed comments and explanations
@@ -51,11 +54,12 @@ Like cherry blossoms that bloom with complete dedication, this portfolio represe
 ## 📱 Project Showcase
 
 ### Featured Projects
-1. **WeatherApp**: JavaScript weather application with API integration
-2. **PPE Detection & Danger Zone Monitoring**: Computer vision system using Python, OpenCV, and Jetson Nano
-3. **SEO Sleuth with AI**: TypeScript-based AI-powered SEO analysis tool
-4. **Sun Yat-Sen Tour Guide**: Interactive web guide with historical information
-5. **Hong Kong Date Countdown**: Vue.js celebration app marking significant moments
+1. **Hong Kong A&E Waits**: Real-time bilingual dashboard that surfaces live Accident & Emergency wait times from the Hong Kong Hospital Authority with severity tiers and auto-refreshing data.
+2. **WeatherApp**: JavaScript weather application with API integration
+3. **PPE Detection & Danger Zone Monitoring**: Computer vision system using Python, OpenCV, and Jetson Nano
+4. **SEO Sleuth with AI**: TypeScript-based AI-powered SEO analysis tool
+5. **Sun Yat-Sen Tour Guide**: Interactive web guide with historical information
+6. **Hong Kong Date Countdown**: Vue.js celebration app marking significant moments
 
 ## 🎯 Skills & Technologies
 

@@ -23,35 +23,6 @@
     <ScrollProgress />
     
     <!-- 
-      MAIN NAVIGATION BAR
-      Fixed-position navbar with glassmorphism design
-      Features: responsive menu, router-link integration, gradient branding
-    -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-lg">
-      <div class="container px-4 d-flex align-items-center" style="position: relative; z-index: 2;">
-        
-        <!-- Brand Logo/Title - Router link to home -->
-        <router-link class="navbar-brand fw-bold" to="/">Hugo Portfolio</router-link>
-        
-        <!-- Mobile Menu Toggle Button -->
-        <div class="d-flex align-items-center gap-3">
-          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-        
-        <!-- Collapsible Navigation Menu -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <!-- Primary navigation items with router-link integration -->
-            <li class="nav-item"><router-link class="nav-link px-3" to="/">Home</router-link></li>
-            <li class="nav-item"><router-link class="nav-link px-3" to="/about">About this web</router-link></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!-- 
       ROUTER VIEW CONTAINER
       Dynamically renders the component for the current route
       All page content is displayed here based on Vue Router configuration
@@ -148,85 +119,6 @@ const email = 'hugoapple213@gmail.com'
    - Consistent color palette with CSS custom properties
 */
 
-/* NAVIGATION BAR STYLES
-   =====================
-   Fixed-position navbar with glassmorphism design and responsive behavior */
-
-/* Main navbar container with glassmorphism effect */
-.navbar {
-  padding: 1.15rem 0;                                              /* Generous padding for breathing room */
-  backdrop-filter: blur(15px);                                     /* Glassmorphism blur effect */
-  background: #faf7f4 !important;                                  /* Soft cream background */
-  border-bottom: 1px solid rgba(236, 154, 154, 0.2);             /* Subtle pink border */
-  box-shadow: 0 4px 25px rgba(236, 154, 154, 0.1);               /* Soft shadow with pink tint */
-  position: relative;                                              /* Relative positioning for z-index context */
-  overflow: hidden;                                                /* Hide overflow for animations */
-}
-
-/* Brand logo styling with gradient text effect */
-.navbar-brand {
-  font-size: 1.5rem;                                              /* Prominent brand size */
-  background: linear-gradient(45deg, #ec9a9a, #f4b1b1);          /* Pink to light pink gradient */
-  -webkit-background-clip: text;                                   /* Clip gradient to text (WebKit) */
-  -webkit-text-fill-color: transparent;                           /* Make text transparent to show gradient */
-  background-clip: text;                                           /* Standard property for text clipping */
-  font-weight: 600;                                                /* Semi-bold weight for prominence */
-  transition: transform 0.3s ease;                                /* Smooth scale animation on hover */
-}
-
-/* Brand hover effect - subtle scale up */
-.navbar-brand:hover {
-  transform: scale(1.03);                                          /* 3% scale increase on hover */
-}
-
-/* Navigation link base styling */
-.nav-link {
-  font-weight: 500;                                                /* Medium font weight */
-  transition: all 0.3s ease;                                      /* Smooth transitions for all properties */
-  color: rgba(51, 51, 51, 0.8) !important;                       /* Dark gray with transparency */
-  position: relative;                                              /* Relative positioning for pseudo-elements */
-  padding-top: 0.6rem;                                            /* Custom vertical padding */
-  padding-bottom: 0.6rem;
-}
-
-/* Active and hover states for navigation links */
-.nav-link:hover, 
-.nav-link.router-link-active, 
-.nav-link.router-link-exact-active {
-  color: #ec9a9a !important;                                      /* Pink color for active/hover */
-  transform: translateY(-2px);                                    /* Subtle upward movement */
-  font-weight: 600;                                                /* Bolder weight for emphasis */
-}
-
-/* Animated underline effect using pseudo-element */
-.nav-link::after {
-  content: '';                                                     /* Empty content for pseudo-element */
-  position: absolute;                                              /* Absolute positioning for precise placement */
-  width: 0;                                                        /* Start with no width */
-  height: 2px;                                                     /* 2px thick underline */
-  bottom: 0.2rem;                                                  /* Position slightly above bottom */
-  left: 50%;                                                       /* Center horizontally */
-  background: linear-gradient(45deg, #ec9a9a, #f4b1b1);          /* Gradient underline */
-  transition: all 0.3s ease;                                      /* Smooth width transition */
-  transform: translateX(-50%);                                    /* Center the element */
-}
-
-/* Show underline on hover and active states */
-.nav-link:hover::after, 
-.nav-link.router-link-active::after, 
-.nav-link.router-link-exact-active::after {
-  width: 80%;                                                      /* Expand to 80% width */
-}
-
-/* Mobile menu toggle button styling */
-.navbar-toggler {
-  border: none;                                                    /* Remove default border */
-}
-
-/* Custom hamburger icon with pink color */
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(236, 154, 154, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
 
 /* RESPONSIVE DESIGN BREAKPOINTS
    =============================

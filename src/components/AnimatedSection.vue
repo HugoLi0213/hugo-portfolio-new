@@ -16,13 +16,13 @@
     - id: HTML id for the section (required)
     - bgClass: Optional CSS class for background styling
   -->
-  <section :class="[id === 'about' ? 'py-3' : 'py-5', bgClass]" :id="id" ref="section">
+  <section :class="['animated-section-wrapper', id === 'about' ? 'py-3' : 'py-5', bgClass]" :id="id" ref="section">
     <div class="container px-4">
-      <!-- Section Title with Gradient Text Effect -->
-      <h2 class="text-center mb-2 display-5 fw-bold" ref="titleEl" v-text="title" style="background: linear-gradient(45deg, #ec9a9a, #f4b1b1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></h2>
+      <!-- Section Title with refined typesetting -->
+      <h2 class="section-heading text-center mb-2" ref="titleEl" v-text="title"></h2>
       
       <!-- Optional Subtitle -->
-      <div v-if="subtitle" class="text-center mb-4 fs-5" v-text="subtitle" style="color: #4b5563;"></div>
+      <p v-if="subtitle" class="section-subtitle text-center mb-4" v-text="subtitle"></p>
       
       <!-- Content Slot - Where child components/content is inserted -->
       <div ref="content" class="content-wrapper">

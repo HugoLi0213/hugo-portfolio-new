@@ -232,13 +232,13 @@ const projects = [
     badge: "Climate Intelligence"
   },
   {
-    title: "HKMTRVUE - MTR & LRT Real-time Arrivals",
-    description: "A Vue.js app providing real-time MTR and Light Rail schedules with traditional timetable view design. Perfect companion to Google Maps for Hong Kong transit navigation.",
-    tags: ["Vue.js", "TypeScript", "Government API", "Transportation", "Real-time Data", "PWA"],
-    link: "https://github.com/HugoLi0213/hkmtrvue",
-    demo: "https://hk-mtr-lrt-vue-app.vercel.app/",
-    icon: "fas fa-train",
-    badge: "Transit Reliability"
+    title: "TriWay-HK (MTR Original)",
+    description: "The original Hong Kong route planner supporting airplane, LRT, bus, and MTR. Features multi-modal trip planning, fare calculation, and real-time route updates for all major transport modes. Designed for commuters and tourists to navigate the city efficiently.",
+    tags: ["JavaScript", "Vue.js", "MTR", "MTR API", "Bus", "Bus API", "LRT", "Airplane", "Routing", "Web App", "Transit"],
+    link: "https://github.com/HugoLi0213/TriWay-HK",
+    demo: null,
+    icon: "fas fa-subway",
+    badge: "Transit Pioneer"
   },
   {
     title: "WeatherApp",

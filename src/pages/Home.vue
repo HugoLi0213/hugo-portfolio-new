@@ -236,7 +236,7 @@ const projects = [
     description: "The original Hong Kong route planner supporting airplane, LRT, bus, and MTR. Features multi-modal trip planning, fare calculation, and real-time route updates for all major transport modes. Designed for commuters and tourists to navigate the city efficiently.",
     tags: ["JavaScript", "Vue.js", "MTR", "MTR API", "Bus", "Bus API", "LRT", "Airplane", "Routing", "Web App", "Transit"],
     link: "https://github.com/HugoLi0213/TriWay-HK",
-    demo: null,
+    demo: "https://triway-hk.vercel.app/",
     icon: "fas fa-subway",
     badge: "Transit Pioneer"
   },
